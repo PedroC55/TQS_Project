@@ -2,7 +2,7 @@
   O objetivo da nossa plataforma é criar um sistema de pick up points que diferentes negócios possam usar para fazer a entrega dos seus produtos, facilitando a vida aos seus clientes. 
 
 
-Roles: 
+## Roles: 
   - Team Coordinator: Pedro Coelho
   - Product owner: Luca Pereira
   - QA Engineer: Diogo Silva
