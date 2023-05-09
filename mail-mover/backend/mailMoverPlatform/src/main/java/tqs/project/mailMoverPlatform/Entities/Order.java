@@ -6,22 +6,24 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 @Document(collection = "orders")
 public class Order {
-    
+    static Integer trackingNumberTracker = 1;
     @Id
     @GeneratedValue
     private String id;
-    private String tracking_number;
-    private String client_name;
+    private String trackingNumber;
+    private String clientName;
     private String status;  // STORE -> COURIER -> ACP_POINT -> COLLECTED
     private Long storePickUpDate;
     private Long acpDeliveryDate;
     private Long clientPickUpDate;
     private String acpId;
     
-    public Order(String tracking_number, String client_name, String acpId) {
-        this.tracking_number = tracking_number;
-        this.client_name = client_name;
+    public Order(String clientName, String acpId) {
+        this.clientName = clientName;
         this.acpId = acpId;
+        
+        this.trackingNumber = trackingNumberTracker.toString();
+        trackingNumberTracker++; 
         this.status = "STORE";
     }
 
@@ -53,20 +55,17 @@ public class Order {
     public String getId() {
         return id;
     }
-    public void setId(String id) {
-        this.id = id;
+    public String gettrackingNumber() {
+        return trackingNumber;
     }
-    public String getTracking_number() {
-        return tracking_number;
+    public void settrackingNumber(String trackingNumber) {
+        this.trackingNumber = trackingNumber;
     }
-    public void setTracking_number(String tracking_number) {
-        this.tracking_number = tracking_number;
+    public String getclientName() {
+        return clientName;
     }
-    public String getClient_name() {
-        return client_name;
-    }
-    public void setClient_name(String client_name) {
-        this.client_name = client_name;
+    public void setclientName(String clientName) {
+        this.clientName = clientName;
     }
     public String getStatus() {
         return status;
