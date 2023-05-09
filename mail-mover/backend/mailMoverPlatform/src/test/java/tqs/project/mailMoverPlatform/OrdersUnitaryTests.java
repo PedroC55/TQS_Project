@@ -11,21 +11,18 @@ public class OrdersUnitaryTests {
     
     @Test
     void when_create_order_then_status_is_store(){
-
-        String tracking_number = "123456";
         String client_name = "John Clarke";
         String acpId = "ACP1";
-        Order order = new Order(tracking_number, client_name, acpId);
+        Order order = new Order(client_name, acpId);
 
         assertEquals("STORE", order.getStatus());
     }
 
     @Test
     void status_fromStoreToCourier_changes_status_and_storePickUpDate() throws Exception {
-        String tracking_number = "123456";
         String client_name = "John Clarke";
         String acpId = "ACP1";
-        Order order = new Order(tracking_number, client_name, acpId);
+        Order order = new Order(client_name, acpId);
 
         order.status_fromStoreToCourier();
 
@@ -40,10 +37,9 @@ public class OrdersUnitaryTests {
 
     @Test
     void status_fromCourierToAcpPoint_changes_status_and_acpDeliveryDate() throws Exception {
-        String tracking_number = "123456";
         String client_name = "John Clarke";
         String acpId = "ACP1";
-        Order order = new Order(tracking_number, client_name, acpId);
+        Order order = new Order(client_name, acpId);
         
         order.status_fromStoreToCourier();
         order.status_fromCourierToAcpPoint();
@@ -59,10 +55,9 @@ public class OrdersUnitaryTests {
     
     @Test
     void status_fromAcpPointToCollected_changes_status_and_clientPickUpDate() throws Exception {
-        String tracking_number = "123456";
         String client_name = "John Clarke";
         String acpId = "ACP1";
-        Order order = new Order(tracking_number, client_name, acpId);
+        Order order = new Order(client_name, acpId);
 
         order.status_fromStoreToCourier();
         order.status_fromCourierToAcpPoint();
