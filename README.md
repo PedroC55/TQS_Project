@@ -10,5 +10,5 @@
   - Developer: Pedro Coelho, Luca Pereira, Diogo Silva, Manuel Diaz
 
 
-Project bookmarks: 
+## Project bookmarks: 
   - Jira: https://tqsproject.atlassian.net/jira/software/c/projects/TP/boards/1?atlOrigin=eyJpIjoiMmVjNWExMzRjYWRmNGUxY2I2Y2Y5N2Y1NzRlYTJhYWIiLCJwIjoiaiJ9
