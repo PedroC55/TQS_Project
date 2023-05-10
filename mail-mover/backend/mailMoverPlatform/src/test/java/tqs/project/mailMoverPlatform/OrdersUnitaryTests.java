@@ -72,4 +72,54 @@ public class OrdersUnitaryTests {
         assertEquals(expectedClientPickUpDate, actualClientPickUpDate);
     }
 
+    @Test
+    void status_fromStoreToCourier_throws_exception() {
+        String client_name = "John Clarke";
+        String acpId = "ACP1";
+        Order order = new Order(client_name, acpId);
+
+        order.setStatus("COURIER");
+
+        Exception exception = assertThrows(Exception.class, () -> {
+            order.status_fromStoreToCourier();
+        });
+
+        String expectedMessage = "Expected status STORE not found";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    void status_fromCourierToAcpPoint_throws_exception() {
+        String client_name = "John Clarke";
+        String acpId = "ACP1";
+        Order order = new Order(client_name, acpId);
+
+        Exception exception = assertThrows(Exception.class, () -> {
+            order.status_fromCourierToAcpPoint();
+        });
+
+        String expectedMessage = "Expected status COURIER not found";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    void status_fromAcpPointToCollected_throws_exception() {
+        String client_name = "John Clarke";
+        String acpId = "ACP1";
+        Order order = new Order(client_name, acpId);
+
+        Exception exception = assertThrows(Exception.class, () -> {
+            order.status_fromAcpPointToCollected();
+        });
+
+        String expectedMessage = "Expected status ACP_POINT not found";
+        String actualMessage = exception.getMessage();
+
+        assertEquals(expectedMessage, actualMessage);
+    }
+
 }
