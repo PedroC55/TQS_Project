@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import tqs.project.mailMoverPlatform.Entities.ACP;
+import tqs.project.mailMoverPlatform.Entities.ACP_public;
 import tqs.project.mailMoverPlatform.Repositories.AcpRepository;
 
 @Service
@@ -13,12 +14,14 @@ public class AcpService {
     AcpRepository repository;
 
     public ACP addACP(ACP acp){
-
+        return repository.save(acp);
     }
-    public ACP getNameAndAddressById(String id){
-
+    
+    public ACP_public getNameAndAddressById(String id){
+        
     }
-    public List<ACP> getAllAcpsNameAndAddress(){
+
+    public List<ACP_public> getAllAcpsNameAndAddress(){
 
     }
 

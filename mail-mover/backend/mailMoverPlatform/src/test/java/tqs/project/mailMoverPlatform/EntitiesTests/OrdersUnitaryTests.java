@@ -24,7 +24,7 @@ public class OrdersUnitaryTests {
         String acpId = "ACP1";
         Order order = new Order(client_name, acpId);
 
-        order.status_fromStoreToCourier();
+        order.status_fromStoreToCourier(null);
 
         String expectedStatus = "COURIER";
         Long expectedStorePickUpDate = System.currentTimeMillis();
@@ -41,8 +41,8 @@ public class OrdersUnitaryTests {
         String acpId = "ACP1";
         Order order = new Order(client_name, acpId);
         
-        order.status_fromStoreToCourier();
-        order.status_fromCourierToAcpPoint();
+        order.status_fromStoreToCourier(null);
+        order.status_fromCourierToAcpPoint(null);
         
         String expectedStatus = "ACP_POINT";
         Long expectedAcpDeliveryDate = System.currentTimeMillis();
@@ -59,9 +59,9 @@ public class OrdersUnitaryTests {
         String acpId = "ACP1";
         Order order = new Order(client_name, acpId);
 
-        order.status_fromStoreToCourier();
-        order.status_fromCourierToAcpPoint();
-        order.status_fromAcpPointToCollected();
+        order.status_fromStoreToCourier(null);
+        order.status_fromCourierToAcpPoint(null);
+        order.status_fromAcpPointToCollected(null);
 
         String expectedStatus = "COLLECTED";
         Long expectedClientPickUpDate = System.currentTimeMillis();
@@ -81,7 +81,7 @@ public class OrdersUnitaryTests {
         order.setStatus("COURIER");
 
         Exception exception = assertThrows(Exception.class, () -> {
-            order.status_fromStoreToCourier();
+            order.status_fromStoreToCourier(null);
         });
 
         String expectedMessage = "Expected status STORE not found";
@@ -97,7 +97,7 @@ public class OrdersUnitaryTests {
         Order order = new Order(client_name, acpId);
 
         Exception exception = assertThrows(Exception.class, () -> {
-            order.status_fromCourierToAcpPoint();
+            order.status_fromCourierToAcpPoint(null);
         });
 
         String expectedMessage = "Expected status COURIER not found";
@@ -113,7 +113,7 @@ public class OrdersUnitaryTests {
         Order order = new Order(client_name, acpId);
 
         Exception exception = assertThrows(Exception.class, () -> {
-            order.status_fromAcpPointToCollected();
+            order.status_fromAcpPointToCollected(null);
         });
 
         String expectedMessage = "Expected status ACP_POINT not found";
