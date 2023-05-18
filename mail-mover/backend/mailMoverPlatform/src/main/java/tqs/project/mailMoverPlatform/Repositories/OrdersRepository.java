@@ -1,13 +1,16 @@
 package tqs.project.mailMoverPlatform.Repositories;
-
 import java.util.List;
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.Optional;
+
+import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 import tqs.project.mailMoverPlatform.Entities.Order;
 
 @Repository
-public interface OrdersRepository extends JpaRepository<Order,String> {
+public interface OrdersRepository extends MongoRepository<Order,String> {
+    Optional<Order> findById(String id);
+    List<Order> findAll();
     Order findByTrackingNumber(String tracking_number);
-    List<Order> findByClientName(String client_name);
     List<Order> findByAcpId(String acpId);
+   
 }

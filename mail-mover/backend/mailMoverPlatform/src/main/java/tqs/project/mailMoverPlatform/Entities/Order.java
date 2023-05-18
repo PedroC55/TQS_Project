@@ -27,26 +27,39 @@ public class Order {
         this.status = "STORE";
     }
 
-    public void status_fromStoreToCourier() throws Exception{
+    public void status_fromStoreToCourier(Long ts) throws Exception{
         if (this.getStatus().equals("STORE")) { 
             this.setStatus("COURIER");
-            this.setStorePickUpDate(System.currentTimeMillis());
+            if (ts != null){
+                this.setStorePickUpDate(ts);
+            }else{
+                this.setStorePickUpDate(System.currentTimeMillis());
+            }
+            
         }else {
             throw new Exception("Expected status STORE not found");
         }
     }
-    public void status_fromCourierToAcpPoint() throws Exception{
+    public void status_fromCourierToAcpPoint(Long ts) throws Exception{
         if (this.getStatus().equals("COURIER")) { 
             this.setStatus("ACP_POINT");
-            this.setAcpDeliveryDate(System.currentTimeMillis());
+            if (ts != null){
+                this.setAcpDeliveryDate(ts);
+            }else{
+                this.setAcpDeliveryDate(System.currentTimeMillis());
+            }
         }else {
             throw new Exception("Expected status COURIER not found");
         }
     }
-    public void status_fromAcpPointToCollected() throws Exception{
+    public void status_fromAcpPointToCollected(Long ts) throws Exception{
         if (this.getStatus().equals("ACP_POINT")) { 
             this.setStatus("COLLECTED");
-            this.setClientPickUpDate(System.currentTimeMillis());
+            if (ts != null){
+                this.setClientPickUpDate(ts);
+            }else{
+                this.setClientPickUpDate(System.currentTimeMillis());
+            }
         }else {
             throw new Exception("Expected status ACP_POINT not found");
         }
