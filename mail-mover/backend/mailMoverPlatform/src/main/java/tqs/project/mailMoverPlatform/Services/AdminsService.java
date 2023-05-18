@@ -10,7 +10,7 @@ import tqs.project.mailMoverPlatform.Repositories.AdminRepository;
 public class AdminsService {
     @Autowired
     AdminRepository repository;
-    
+     
     public Admin addAdmin(Admin admin){
 
     }

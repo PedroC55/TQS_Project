@@ -17,7 +17,7 @@ public class OrdersService {
 
     @Autowired
     MongoTemplate mongoTemplate;
-
+    
     public List<Order> getAllOrders(){
 
     }
@@ -28,7 +28,7 @@ public class OrdersService {
 
         return mongoTemplate.find(query,Order.class);*/
     }
-
+    
     public String addOrder(Order order){
 
     }
