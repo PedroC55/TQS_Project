@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
-import tqs.project.mailMoverPlatform.Entities.Order;
+import tqs.project.mailMoverPlatform.entities.Order;
 
 public class OrdersUnitaryTests {
     

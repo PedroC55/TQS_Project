@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.Entities;
+package tqs.project.mailMoverPlatform.entities;
 
 public class ACP_public {
     private String id;

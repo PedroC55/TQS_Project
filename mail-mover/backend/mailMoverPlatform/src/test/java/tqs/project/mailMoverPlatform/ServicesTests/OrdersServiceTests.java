@@ -3,8 +3,9 @@ package tqs.project.mailMoverPlatform.ServicesTests;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import tqs.project.mailMoverPlatform.Repositories.OrdersRepository;
-import tqs.project.mailMoverPlatform.Services.OrdersService;
+
+import tqs.project.mailMoverPlatform.repositories.OrdersRepository;
+import tqs.project.mailMoverPlatform.services.OrdersService;
 
 public class OrdersServiceTests {
 

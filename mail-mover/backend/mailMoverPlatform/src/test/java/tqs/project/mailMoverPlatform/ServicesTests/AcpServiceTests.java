@@ -3,8 +3,9 @@ package tqs.project.mailMoverPlatform.ServicesTests;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import tqs.project.mailMoverPlatform.Repositories.AcpRepository;
-import tqs.project.mailMoverPlatform.Services.AcpService;
+
+import tqs.project.mailMoverPlatform.repositories.AcpRepository;
+import tqs.project.mailMoverPlatform.services.AcpService;
 
 public class AcpServiceTests {
     @Mock

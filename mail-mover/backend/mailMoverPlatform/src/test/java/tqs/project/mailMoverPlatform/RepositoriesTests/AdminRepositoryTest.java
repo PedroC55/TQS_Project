@@ -1,9 +1,10 @@
-package tqs.project.mailMoverPlatform.RepositoriesTests;
+package tqs.project.mailMoverPlatform.repositoriesTests;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import tqs.project.mailMoverPlatform.Repositories.AdminRepository;
+
+import tqs.project.mailMoverPlatform.repositories.AdminRepository;
 
 public class AdminRepositoryTest {
     @Autowired

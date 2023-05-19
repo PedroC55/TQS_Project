@@ -1,10 +1,10 @@
-package tqs.project.mailMoverPlatform.Services;
+package tqs.project.mailMoverPlatform.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tqs.project.mailMoverPlatform.Entities.Admin;
-import tqs.project.mailMoverPlatform.Repositories.AdminRepository;
+import tqs.project.mailMoverPlatform.repositories.AdminRepository;
+import tqs.project.mailMoverPlatform.entities.Admin;
 
 @Service
 public class AdminsService {

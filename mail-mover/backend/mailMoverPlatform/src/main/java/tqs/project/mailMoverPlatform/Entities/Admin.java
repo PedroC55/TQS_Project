@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.Entities;
+package tqs.project.mailMoverPlatform.entities;
 
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;

@@ -1,12 +1,12 @@
-package tqs.project.mailMoverPlatform.Services;
+package tqs.project.mailMoverPlatform.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import tqs.project.mailMoverPlatform.Entities.ACP;
-import tqs.project.mailMoverPlatform.Entities.ACP_public;
-import tqs.project.mailMoverPlatform.Repositories.AcpRepository;
+import tqs.project.mailMoverPlatform.repositories.AcpRepository;
+import tqs.project.mailMoverPlatform.entities.ACP;
+import tqs.project.mailMoverPlatform.entities.ACP_public;
 
 @Service
 public class AcpService {

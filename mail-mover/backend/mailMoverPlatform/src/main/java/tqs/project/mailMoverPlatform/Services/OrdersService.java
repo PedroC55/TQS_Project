@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.Services;
+package tqs.project.mailMoverPlatform.services;
 
 import java.util.List;
 
@@ -7,8 +7,9 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
-import tqs.project.mailMoverPlatform.Entities.Order;
-import tqs.project.mailMoverPlatform.Repositories.OrdersRepository;
+
+import tqs.project.mailMoverPlatform.repositories.OrdersRepository;
+import tqs.project.mailMoverPlatform.entities.Order;
 
 @Service
 public class OrdersService {

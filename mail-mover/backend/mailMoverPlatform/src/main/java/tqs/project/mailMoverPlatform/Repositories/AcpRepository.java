@@ -1,10 +1,10 @@
-package tqs.project.mailMoverPlatform.Repositories;
+package tqs.project.mailMoverPlatform.repositories;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
 
-import tqs.project.mailMoverPlatform.Entities.ACP;
+import tqs.project.mailMoverPlatform.entities.ACP;
 
 @Repository
 public interface AcpRepository  extends MongoRepository<ACP,String>{
