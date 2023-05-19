@@ -19,16 +19,17 @@ public class OrdersUnitaryTests {
     }
 
     @Test
-    void status_fromStoreToCourier_changes_status_and_storePickUpDate() throws Exception {
-        String client_name = "John Clarke";
+    void status_fromStoreToCourier_with_timestamp_sets_storePickUpDate() throws Exception {
+        String client_name = "John Doe";
         String acpId = "ACP1";
         Order order = new Order(client_name, acpId);
 
-        order.status_fromStoreToCourier(null);
+        Long expectedStorePickUpDate = 123456789L;
+        order.status_fromStoreToCourier(expectedStorePickUpDate);
 
         String expectedStatus = "COURIER";
-        Long expectedStorePickUpDate = System.currentTimeMillis();
         String actualStatus = order.getStatus();
+
         Long actualStorePickUpDate = order.getStorePickUpDate();
 
         assertEquals(expectedStatus, actualStatus);
@@ -36,7 +37,44 @@ public class OrdersUnitaryTests {
     }
 
     @Test
-    void status_fromCourierToAcpPoint_changes_status_and_acpDeliveryDate() throws Exception {
+    void status_fromStoreToCourier_without_timestamp_sets_current_time_as_storePickUpDate() throws Exception {
+        String client_name = "John Clarke";
+        String acpId = "ACP1";
+        Order order = new Order(client_name, acpId);
+
+        order.status_fromStoreToCourier(null);
+
+        String expectedStatus = "COURIER";
+        String actualStatus = order.getStatus();
+
+        Long expectedStorePickUpDate = System.currentTimeMillis();
+        Long actualStorePickUpDate = order.getStorePickUpDate();
+
+        assertEquals(expectedStatus, actualStatus);
+        assertEquals(expectedStorePickUpDate, actualStorePickUpDate);
+    }
+
+    @Test
+    void status_fromCourierToAcpPoint_with_timestamp_sets_acpDeliveryDate() throws Exception {
+        String client_name = "John Clarke";
+        String acpId = "ACP1";
+        Order order = new Order(client_name, acpId);
+        
+        Long expectedAcpDeliveryDate = 123456789L;
+        order.status_fromStoreToCourier(expectedAcpDeliveryDate);
+        order.status_fromCourierToAcpPoint(expectedAcpDeliveryDate);
+        
+        String expectedStatus = "ACP_POINT";
+        String actualStatus = order.getStatus();
+
+        Long actualAcpDeliveryDate = order.getAcpDeliveryDate();
+        
+        assertEquals(expectedStatus, actualStatus);
+        assertEquals(expectedAcpDeliveryDate, actualAcpDeliveryDate);
+    }
+
+    @Test
+    void status_fromCourierToAcpPoint_without_timestamp_sets_current_time_as_acpDeliveryDate() throws Exception {
         String client_name = "John Clarke";
         String acpId = "ACP1";
         Order order = new Order(client_name, acpId);
@@ -45,16 +83,37 @@ public class OrdersUnitaryTests {
         order.status_fromCourierToAcpPoint(null);
         
         String expectedStatus = "ACP_POINT";
-        Long expectedAcpDeliveryDate = System.currentTimeMillis();
         String actualStatus = order.getStatus();
+
+        Long expectedAcpDeliveryDate = System.currentTimeMillis();
         Long actualAcpDeliveryDate = order.getAcpDeliveryDate();
         
         assertEquals(expectedStatus, actualStatus);
         assertEquals(expectedAcpDeliveryDate, actualAcpDeliveryDate);
     }
+
+    @Test
+    void status_fromAcpPointToCollected_with_timestamp_sets_clientPickUpDate() throws Exception {
+        String client_name = "John Clarke";
+        String acpId = "ACP1";
+        Order order = new Order(client_name, acpId);
+
+        Long expectedClientPickUpDate = 123456789L;
+        order.status_fromStoreToCourier(expectedClientPickUpDate);
+        order.status_fromCourierToAcpPoint(expectedClientPickUpDate);
+        order.status_fromAcpPointToCollected(expectedClientPickUpDate);
+
+        String expectedStatus = "COLLECTED";
+        String actualStatus = order.getStatus();
+
+        Long actualClientPickUpDate = order.getClientPickUpDate();
+
+        assertEquals(expectedStatus, actualStatus);
+        assertEquals(expectedClientPickUpDate, actualClientPickUpDate);
+    }
     
     @Test
-    void status_fromAcpPointToCollected_changes_status_and_clientPickUpDate() throws Exception {
+    void status_fromAcpPointToCollected_without_timestamp_sets_current_time_as_clientPickUpDate() throws Exception {
         String client_name = "John Clarke";
         String acpId = "ACP1";
         Order order = new Order(client_name, acpId);
@@ -64,8 +123,9 @@ public class OrdersUnitaryTests {
         order.status_fromAcpPointToCollected(null);
 
         String expectedStatus = "COLLECTED";
-        Long expectedClientPickUpDate = System.currentTimeMillis();
         String actualStatus = order.getStatus();
+
+        Long expectedClientPickUpDate = System.currentTimeMillis();
         Long actualClientPickUpDate = order.getClientPickUpDate();
 
         assertEquals(expectedStatus, actualStatus);
