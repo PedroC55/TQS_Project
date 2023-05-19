@@ -13,8 +13,9 @@ code {
 }
 
 .productList{
-  display: flex;
+  display: inline-block;
   justify-content: space-evenly;
+
   margin-top: 5rem;
   
 }

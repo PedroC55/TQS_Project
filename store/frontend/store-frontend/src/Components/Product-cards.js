@@ -5,7 +5,7 @@ export function Products(props){
     return(
         
         <div className='productList'>
-            <div className='row'>
+            
                 <div key={props.id} className='productCard'>
                     <img src={props.image} alt='product-img' className='productImage'></img>
                     
@@ -30,7 +30,7 @@ export function Products(props){
                         </div>
                     </div>
                 </div>
-            </div>
+            
          </div>
     )
 }
