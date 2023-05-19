@@ -18,15 +18,15 @@ public class AcpService {
     }
     
     public ACP_public getNameAndAddressById(String id){
-        
+        return null;
     }
 
     public List<ACP_public> getAllAcpsNameAndAddress(){
-
+        return null;
     }
 
     public boolean performLogin(String email, String password){
-
+        return false;
     }
     
 }

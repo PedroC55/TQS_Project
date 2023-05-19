@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 
+import tqs.project.mailMoverPlatform.Entities.ACP;
 import tqs.project.mailMoverPlatform.Repositories.AcpRepository;
 
 public class AcpRepositoryTest {
@@ -14,7 +15,8 @@ public class AcpRepositoryTest {
 
     @Test
     void givenAnAcp_whenFindById_thenReturnAcp(){
-
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        entityManager.persistAndFlush(acp);
     }
 
     @Test

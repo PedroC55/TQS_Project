@@ -19,7 +19,7 @@ public class OrdersService {
     MongoTemplate mongoTemplate;
 
     public List<Order> getAllOrders(){
-
+        return null;
     }
     public List<Order> search(String acpId, String trackingNumber, String status ){
         /*Query query = new Query();
@@ -27,22 +27,23 @@ public class OrdersService {
         query.addCriteria(Criteria.where(acpId).is(acpId));
 
         return mongoTemplate.find(query,Order.class);*/
+        return null;
     }
 
     public String addOrder(Order order){
-
+        return null;
     }
 
     public boolean changeState_STORE_to_COURIER(String trackingNumber, Long ts){
-
+        return false;
     }
 
     public boolean changeState_COURIER_to_ACPPOINT(String trackingNumber, Long ts){
-
+        return false;
     }
 
     public boolean changeState_ACPPOINT_to_COLLECTED(String trackingNumber, Long ts){
-
+        return false;
     }
     
 }

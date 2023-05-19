@@ -12,10 +12,10 @@ public class AdminsService {
     AdminRepository repository;
     
     public Admin addAdmin(Admin admin){
-
+        return null;
     }
     public boolean performLogin(String email, String password){
-
+        return false;
     }
     
     
