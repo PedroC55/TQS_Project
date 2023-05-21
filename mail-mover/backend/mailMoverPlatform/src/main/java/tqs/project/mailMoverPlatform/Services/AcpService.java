@@ -17,7 +17,7 @@ public class AcpService {
         return repository.save(acp);
     }
      
-    public ACP_public getNameAndAddressById(String id){
+    public ACP_public getNameAndAddressById(Long id){
         return null;
     }
 

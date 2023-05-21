@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.ServicesTests;
+package tqs.project.mailMoverPlatform.servicesTests;
 
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

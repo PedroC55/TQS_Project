@@ -3,31 +3,22 @@ package tqs.project.mailMoverPlatform.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.mongodb.core.MongoTemplate;
-import org.springframework.data.mongodb.core.query.Criteria;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import tqs.project.mailMoverPlatform.repositories.OrdersRepository;
+import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
 
 @Service
 public class OrdersService {
     @Autowired
     OrdersRepository repository;
-
-    @Autowired
-    MongoTemplate mongoTemplate;
     
     public List<Order> getAllOrders(){
         return null;
     }
-    public List<Order> search(String acpId, String trackingNumber, String status ){
-        /*Query query = new Query();
-        query.addCriteria(Criteria.where(acpId).is(acpId));
-        query.addCriteria(Criteria.where(acpId).is(acpId));
-
-        return mongoTemplate.find(query,Order.class);*/
+    public List<Order> search(ACP acp, String trackingNumber, String status ){
+       
         return null;
     }
     

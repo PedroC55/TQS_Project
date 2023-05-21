@@ -1,15 +1,26 @@
 package tqs.project.mailMoverPlatform.entities;
 
-import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.annotation.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
 
-@Document(collection = "admins")
+@Table(name="admins")
+@Entity
 public class Admin {
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column
+    @NotNull(message = "email is mandatory")
     private String email;
+
+    @Column
+    @NotNull(message = "password is mandatory")
     private String password;
     
     public Admin(String email, String password) {
@@ -20,7 +31,7 @@ public class Admin {
     public String getEmail() {
         return email;
     }
-    public String getId() {
+    public Long getId() {
         return id;
     }
     public void setEmail(String email) {

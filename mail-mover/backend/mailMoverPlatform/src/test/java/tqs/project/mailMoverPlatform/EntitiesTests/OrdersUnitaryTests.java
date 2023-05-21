@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
+import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
 
 public class OrdersUnitaryTests {
@@ -12,8 +13,8 @@ public class OrdersUnitaryTests {
     @Test
     void when_create_order_then_status_is_store(){
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         assertEquals("STORE", order.getStatus());
     }
@@ -21,8 +22,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromStoreToCourier_with_timestamp_sets_storePickUpDate() throws Exception {
         String client_name = "John Doe";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         Long expectedStorePickUpDate = 123456789L;
         order.status_fromStoreToCourier(expectedStorePickUpDate);
@@ -39,8 +40,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromStoreToCourier_without_timestamp_sets_current_time_as_storePickUpDate() throws Exception {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         order.status_fromStoreToCourier(null);
 
@@ -57,8 +58,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromCourierToAcpPoint_with_timestamp_sets_acpDeliveryDate() throws Exception {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
         
         Long expectedAcpDeliveryDate = 123456789L;
         order.status_fromStoreToCourier(expectedAcpDeliveryDate);
@@ -76,8 +77,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromCourierToAcpPoint_without_timestamp_sets_current_time_as_acpDeliveryDate() throws Exception {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
         
         order.status_fromStoreToCourier(null);
         order.status_fromCourierToAcpPoint(null);
@@ -95,8 +96,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromAcpPointToCollected_with_timestamp_sets_clientPickUpDate() throws Exception {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         Long expectedClientPickUpDate = 123456789L;
         order.status_fromStoreToCourier(expectedClientPickUpDate);
@@ -115,8 +116,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromAcpPointToCollected_without_timestamp_sets_current_time_as_clientPickUpDate() throws Exception {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         order.status_fromStoreToCourier(null);
         order.status_fromCourierToAcpPoint(null);
@@ -135,8 +136,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromStoreToCourier_throws_exception() {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         order.setStatus("COURIER");
 
@@ -153,8 +154,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromCourierToAcpPoint_throws_exception() {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         Exception exception = assertThrows(Exception.class, () -> {
             order.status_fromCourierToAcpPoint(null);
@@ -169,8 +170,8 @@ public class OrdersUnitaryTests {
     @Test
     void status_fromAcpPointToCollected_throws_exception() {
         String client_name = "John Clarke";
-        String acpId = "ACP1";
-        Order order = new Order(client_name, acpId);
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        Order order = new Order(client_name, acp);
 
         Exception exception = assertThrows(Exception.class, () -> {
             order.status_fromAcpPointToCollected(null);

@@ -1,26 +1,44 @@
 package tqs.project.mailMoverPlatform.entities;
 
-import org.springframework.data.annotation.Id;
+import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.GenerationType;
+import javax.persistence.Table;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
-@Document(collection = "orders")
+@Table(name="orders")
+@Entity
 public class Order {
     static Integer trackingNumberTracker = 1;
+    
     @Id
-    @GeneratedValue
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    @Column
+    @NotNull(message = "tracking number is mandatory")
     private String trackingNumber;
+    
+    @Column
+    @NotNull(message = "client name is mandatory")
     private String clientName;
+
     private String status;  // STORE -> COURIER -> ACP_POINT -> COLLECTED
     private Long storePickUpDate;
     private Long acpDeliveryDate;
     private Long clientPickUpDate;
-    private String acpId;
+
+    @ManyToOne
+    @JoinColumn(name = "acp_id")
+    private ACP acp;
     
-    public Order(String clientName, String acpId) {
+    public Order(String clientName, ACP acp) {
         this.clientName = clientName;
-        this.acpId = acpId;
+        this.acp = acp;
         
         this.trackingNumber = trackingNumberTracker.toString();
         trackingNumberTracker++; 
@@ -65,7 +83,7 @@ public class Order {
         }
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
     public String gettrackingNumber() {
@@ -104,11 +122,11 @@ public class Order {
     public void setClientPickUpDate(Long clientPickUpDate) {
         this.clientPickUpDate = clientPickUpDate;
     }
-    public String getAcpId() {
-        return acpId;
+    public ACP getAcp() {
+        return acp;
     }
-    public void setAcpId(String acpId) {
-        this.acpId = acpId;
+    public void setAcpId(ACP acp) {
+        this.acp = acp;
     }
 
 }
