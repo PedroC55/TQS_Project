@@ -1,6 +1,6 @@
 import React from 'react'
 import Navbar from "./Navbar"
-import BannerImage from "../Assets/paris.jpg"
+import BannerImage from "../Assets/paris.png"
 import { FiArrowRight} from "react-icons/fi"
 import BannerBackground from "../Assets/home-banner-background.png"
 
