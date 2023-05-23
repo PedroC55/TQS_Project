@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.IntegrationTests;
+package tqs.project.mailMoverPlatform.integrationTests;
 
 public class AdminControllerIT {
     

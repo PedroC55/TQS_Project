@@ -10,5 +10,5 @@ import tqs.project.mailMoverPlatform.entities.Admin;
 public interface AdminRepository  extends JpaRepository<Admin,Long>{
     Optional<Admin> findById(Long id);
     List<Admin> findAll();
-    Admin findByEmail(String email);
+    Optional<Admin> findByEmail(String email);
 }

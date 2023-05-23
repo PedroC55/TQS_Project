@@ -29,7 +29,6 @@ public class AcpRepositoryTest {
         entityManager.persistAndFlush(acp);
 
         Optional<ACP> response = repository.findById(acp.getId());
-
         assertThat(response).isPresent().contains(acp);
     }
 

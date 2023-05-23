@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.EntitiesTests;
+package tqs.project.mailMoverPlatform.entitiesTests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

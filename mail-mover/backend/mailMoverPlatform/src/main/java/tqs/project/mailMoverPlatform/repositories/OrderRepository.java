@@ -7,10 +7,10 @@ import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
 
 @Repository
-public interface OrdersRepository extends JpaRepository<Order,Long> {
+public interface OrderRepository extends JpaRepository<Order,Long> {
     Optional<Order> findById(Long id);
     List<Order> findAll();
     Order findByTrackingNumber(String tracking_number);
     List<Order> findByAcp(ACP acp);
-   
+    Order findByAcpAndTrackingNumber(ACP acp, String trackingNumber);
 }

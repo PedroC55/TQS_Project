@@ -10,4 +10,5 @@ import tqs.project.mailMoverPlatform.entities.ACP;
 public interface AcpRepository extends JpaRepository<ACP,Long>{
     Optional<ACP> findById(Long id);
     List<ACP> findAll();
+    Optional<ACP> findByEmail(String email);
 }
