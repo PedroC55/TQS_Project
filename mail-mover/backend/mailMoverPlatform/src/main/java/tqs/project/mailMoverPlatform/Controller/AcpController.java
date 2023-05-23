@@ -17,10 +17,7 @@ public class AcpController {
 
 
     @GetMapping("")
-    public Page<OrderList> getOrders() {
-        Optional<User> user_opt = userService.getAuthenticatedUser();
-        if (!user_opt.isPresent())  return Page.empty();
-        User user = user_opt.get();
-        return orderListService.findAll(user, Pageable.unpaged());
+    public Page<Order> getOrders() {
+
     }
 }
