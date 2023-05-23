@@ -68,7 +68,7 @@ public class AdminRepositoryTest {
     @Test
     void givenAnAdmin_whenFindByInvalidEmail_thenReturnNull(){
         Optional<Admin> response = repository.findByEmail("fakeEmail@mail.com");
-        assertThat(response).isNull();
+        assertThat(response).isNotPresent();
     }
 
 }

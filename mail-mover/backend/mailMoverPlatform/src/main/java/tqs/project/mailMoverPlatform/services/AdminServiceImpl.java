@@ -18,7 +18,7 @@ public class AdminServiceImpl implements AdminService{
     }
     @Override
     public boolean performLogin(String email, String password){
-        Optional<Admin> admin =repository.findByEmail(email);
+        Optional<Admin> admin = repository.findByEmail(email);
         if (!admin.isPresent()){
             return false;
         }

@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotNull;
 
 
 @Entity
-@Table(name="ACPS")
+@Table(name="acps")
 public class ACP {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
