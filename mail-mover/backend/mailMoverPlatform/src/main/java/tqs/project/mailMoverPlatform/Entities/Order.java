@@ -13,15 +13,9 @@ import jakarta.validation.constraints.NotNull;
 @Entity
 @Table(name="orders")
 public class Order {
-    static Integer trackingNumberTracker = 1;
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @Column
-    @NotNull(message = "tracking number is mandatory")
-    private String trackingNumber;
     
     @Column
     @NotNull(message = "client name is mandatory")
@@ -39,12 +33,10 @@ public class Order {
     public Order(String clientName, ACP acp) {
         this.clientName = clientName;
         this.acp = acp;
-        
-        this.trackingNumber = trackingNumberTracker.toString();
-        trackingNumberTracker++; 
+
         this.status = "STORE";
     }
-
+    public Order(){};
     public void status_fromStoreToCourier(Long ts) throws Exception{
         if (this.getStatus().equals("STORE")) { 
             this.setStatus("COURIER");
@@ -86,12 +78,6 @@ public class Order {
     public Long getId() {
         return id;
     }
-    public String gettrackingNumber() {
-        return trackingNumber;
-    }
-    public void settrackingNumber(String trackingNumber) {
-        this.trackingNumber = trackingNumber;
-    }
     public String getclientName() {
         return clientName;
     }
@@ -106,6 +92,9 @@ public class Order {
     }
     public Long getStorePickUpDate() {
         return storePickUpDate;
+    }
+    public void setId(Long id) {
+        this.id = id;
     }
     public void setStorePickUpDate(Long storePickUpDate) {
         this.storePickUpDate = storePickUpDate;

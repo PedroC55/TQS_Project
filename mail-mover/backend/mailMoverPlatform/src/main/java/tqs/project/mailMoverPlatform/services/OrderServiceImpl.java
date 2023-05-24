@@ -1,6 +1,7 @@
 package tqs.project.mailMoverPlatform.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,46 +24,60 @@ public class OrderServiceImpl implements OrderService{
         return repository.findByAcp(acp);
     }
     @Override
-    public Order getByTrackingNumber(String trackingNumber){
-        return repository.findByTrackingNumber(trackingNumber);
+    public Order getById(Long id){
+        Optional<Order> order = repository.findById(id);
+        if (order.isPresent()){return order.get();}
+        return null;
     }
     @Override
-    public Order getByAcpAndTrackingNumber(ACP acp, String trackingNumber){
-        return repository.findByAcpAndTrackingNumber(acp, trackingNumber);
+    public Order getByAcpAndId(ACP acp, Long id){
+        return repository.findByAcpAndId(acp, id);
     }
     @Override
     public Order addOrder(Order order){
         return repository.save(order);
     }
     @Override
-    public boolean changeState_STORE_to_COURIER(String trackingNumber, Long ts){
-        Order order = repository.findByTrackingNumber(trackingNumber);
+    public boolean changeState_STORE_to_COURIER(Long id, Long ts){
+        Optional<Order> order = repository.findById(id);
+        if (!order.isPresent()){return false;}
         try {
-            order.status_fromStoreToCourier(ts);
+            Order newOrder = order.get();
+            newOrder.status_fromStoreToCourier(ts);
+            repository.save(newOrder);
         } catch (Exception e) {
             return false;
         }
         return true;
     }
     @Override
-    public boolean changeState_COURIER_to_ACPPOINT(String trackingNumber, Long ts){
-        Order order = repository.findByTrackingNumber(trackingNumber);
+    public boolean changeState_COURIER_to_ACPPOINT(Long id, Long ts){
+        Optional<Order> order = repository.findById(id);
+        if (!order.isPresent()){return false;}
         try {
-            order.status_fromCourierToAcpPoint(ts);
+            Order newOrder = order.get();
+            newOrder.status_fromCourierToAcpPoint(ts);
+            repository.save(newOrder);
         } catch (Exception e) {
             return false;
         }
         return true;
     }
     @Override
-    public boolean changeState_ACPPOINT_to_COLLECTED(String trackingNumber, Long ts){
-        Order order = repository.findByTrackingNumber(trackingNumber);
+    public boolean changeState_ACPPOINT_to_COLLECTED(Long id, Long ts){
+        Optional<Order> order = repository.findById(id);
+        if (!order.isPresent()){return false;}
         try {
-            order.status_fromAcpPointToCollected(ts);
+            Order newOrder = order.get();
+            newOrder.status_fromAcpPointToCollected(ts);
+            repository.save(newOrder);
         } catch (Exception e) {
             return false;
         }
         return true;
+    }
+    public void deleteAll() {
+        repository.deleteAll();
     }
 
     

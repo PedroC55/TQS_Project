@@ -7,11 +7,11 @@ import tqs.project.mailMoverPlatform.entities.Order;
 
 public interface OrderService {
     public List<Order> getAllOrders();
-    public Order getByTrackingNumber(String trackingNumber);
+    public Order getById(Long id);
     public List<Order> getByAcp(ACP acp);
-    public Order getByAcpAndTrackingNumber(ACP acp, String trackingNumber);
+    public Order getByAcpAndId(ACP acp, Long id);
     public Order addOrder(Order order);
-    public boolean changeState_STORE_to_COURIER(String trackingNumber, Long ts);
-    public boolean changeState_COURIER_to_ACPPOINT(String trackingNumber, Long ts);
-    public boolean changeState_ACPPOINT_to_COLLECTED(String trackingNumber, Long ts);
+    public boolean changeState_STORE_to_COURIER(Long id, Long ts);
+    public boolean changeState_COURIER_to_ACPPOINT(Long id, Long ts);
+    public boolean changeState_ACPPOINT_to_COLLECTED(Long id, Long ts);
 }

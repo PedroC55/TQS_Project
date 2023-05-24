@@ -38,6 +38,7 @@ public class ACP {
         this.email = email;
         this.password = password;
     }
+    public ACP(){};
     public void setId(Long id) {
         this.id = id;
     }

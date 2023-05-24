@@ -2,9 +2,9 @@ package tqs.project.mailMoverPlatform.repositoriesTests;
 
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +15,7 @@ import tqs.project.mailMoverPlatform.entities.Order;
 import tqs.project.mailMoverPlatform.repositories.OrderRepository;
 
 @DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 public class OrdersRepositoryTest {
     
     @Autowired
@@ -67,21 +68,6 @@ public class OrdersRepositoryTest {
         assertThat(allOrders).isNotNull().isEmpty();
     }
 
-    @Test
-    void givenAnOrder_whenFindByTrackingNumber_thenReturnOrder(){
-        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
-        entityManager.persistAndFlush(acp);
-        Order order = new Order("Cliente 1", acp);
-        entityManager.persistAndFlush(order);
-
-        Order response = repository.findByTrackingNumber(order.gettrackingNumber());
-        assertThat(response.gettrackingNumber().equals(order.gettrackingNumber()));
-    }
-    @Test
-    void givenAnOrder_whenFindByInvalidTrackingNumber_thenReturnNull(){
-        Order response = repository.findByTrackingNumber("fakeTN");
-        assertThat(response).isNull();
-    }
 
     @Test
     void givenAnOrder_whenFindByAcp_thenReturnOrder(){

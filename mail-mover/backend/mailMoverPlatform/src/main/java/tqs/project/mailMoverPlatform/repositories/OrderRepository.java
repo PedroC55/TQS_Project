@@ -10,7 +10,6 @@ import tqs.project.mailMoverPlatform.entities.Order;
 public interface OrderRepository extends JpaRepository<Order,Long> {
     Optional<Order> findById(Long id);
     List<Order> findAll();
-    Order findByTrackingNumber(String tracking_number);
     List<Order> findByAcp(ACP acp);
-    Order findByAcpAndTrackingNumber(ACP acp, String trackingNumber);
+    Order findByAcpAndId(ACP acp, Long id);
 }

@@ -30,6 +30,7 @@ public class Admin {
         this.email = email;
         this.password = password;
     }
+    public Admin(){};
 
     public String getEmail() {
         return email;

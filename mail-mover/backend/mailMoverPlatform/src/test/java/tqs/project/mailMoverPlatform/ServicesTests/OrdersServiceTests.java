@@ -89,77 +89,73 @@ class OrdersServiceTests {
     }
 
     @Test
-    void whenGetByValidTrackingNumber_returnOrderWithTrackingNumber(){
+    void whenGetByValidId_returnOrderWithTrackingNumber(){
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
 
-        order.settrackingNumber("1");
-        Mockito.when(service.getByTrackingNumber("1")).thenReturn(order);
+        order.setId(1L);
+        Mockito.when(service.getById(1L)).thenReturn(order);
 
-        Order returned_order = service.getByTrackingNumber("1");
-        assertThat(returned_order.gettrackingNumber().equals("1"));
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findByTrackingNumber("1");
+        Order returned_order = service.getById(1L);
+        assertThat(returned_order.getId().equals(1L));
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findById(1L);
     }
 
     @Test
-    void whenGetByInvalidTrackingNumber_returnNull(){
+    void whenGetByInvalidId_returnNull(){
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
 
-        order.settrackingNumber("1");
-        Mockito.when(service.getByTrackingNumber("1")).thenReturn(order);
+        order.setId(1L);
+        Mockito.when(service.getById(1L)).thenReturn(order);
 
-        Order returned_order = service.getByTrackingNumber("-1");
+        Order returned_order = service.getById(-1L);
         assertThat(returned_order).isNull();
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findByTrackingNumber("-1");
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findById(-1L);
     }
 
     @Test
     void whenchangeState_STORE_to_COURIER_thenReturnTrueAndStateIsCOURIER() throws Exception{
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
-        order.settrackingNumber("1");
+        order.setId(1L);
+        Mockito.when(service.getById(1L)).thenReturn(order);
 
-        Mockito.when(service.getByTrackingNumber("1")).thenReturn(order);
-
-        boolean result = service.changeState_STORE_to_COURIER("1", 123456L);
+        boolean result = service.changeState_STORE_to_COURIER(1L, 123456L);
         assertThat(result).isTrue();
         assertThat(order.getStatus()).isEqualTo("COURIER");
 
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findByTrackingNumber("1"); 
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findById(1L); 
     }
 
     @Test
     void whenchangeState_COURIER_to_ACPPOINT_thenReturnTrueAndStateIsACPPOINT() throws Exception{
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
-        order.settrackingNumber("1");
+        order.setId(1L);
         order.setStatus("COURIER");
-
-        Mockito.when(service.getByTrackingNumber("1")).thenReturn(order);
-
-        boolean result = service.changeState_COURIER_to_ACPPOINT("1", 123456L);
+        Mockito.when(service.getById(1L)).thenReturn(order);
+        
+        boolean result = service.changeState_COURIER_to_ACPPOINT(1L, 123456L);
         assertThat(result).isTrue();
         assertThat(order.getStatus()).isEqualTo("ACP_POINT");
 
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findByTrackingNumber("1");
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findById(1L);
     }
 
     @Test
     void whenchangeState_ACPOINT_to_COLLECTED_thenReturnTrueAndStateIsCOLLECTED(){
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
-        order.settrackingNumber("1");
+        order.setId(1L);
         order.setStatus("ACP_POINT");
+        Mockito.when(service.getById(1L)).thenReturn(order);
 
-        Mockito.when(service.getByTrackingNumber("1")).thenReturn(order);
-
-        boolean result = service.changeState_ACPPOINT_to_COLLECTED("1", 123456L);
+        boolean result = service.changeState_ACPPOINT_to_COLLECTED(1L, 123456L);
         assertThat(result).isTrue();
         assertThat(order.getStatus()).isEqualTo("COLLECTED");
 
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findByTrackingNumber("1");
-        
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findById(1L);
     }
 
 }
