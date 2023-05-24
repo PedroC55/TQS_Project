@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,12 @@ class OrdersServiceTests {
     void whenAddValidOrder_thenReturnOrderWithValidId(){
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
-        Mockito.when(service.addOrder(order)).thenReturn(order);
+        order.setId(1L);
+        Mockito.when(repository.save(order)).thenReturn(order);
+
+        Order savedOrder = service.addOrder(order);
+        assertThat(savedOrder.getId().equals(acp.getId()));
+        Mockito.verify(repository, VerificationModeFactory.times(1)).save(order);
     }
     
     @Test
@@ -46,7 +52,7 @@ class OrdersServiceTests {
         orders.add(order1);
         orders.add(order2);
         orders.add(order3);
-        Mockito.when(service.getAllOrders()).thenReturn(orders);
+        Mockito.when(repository.findAll()).thenReturn(orders);
 
         List<Order> returned_list_orders = service.getAllOrders();
         assertThat(returned_list_orders).containsExactly(order1, order2, order3);
@@ -64,7 +70,7 @@ class OrdersServiceTests {
         orders.add(order1);
         orders.add(order2);
         orders.add(order3);
-        Mockito.when(service.getByAcp(acp)).thenReturn(orders);
+        Mockito.when(repository.findByAcp(acp)).thenReturn(orders);
 
         List<Order> returned_list_orders = service.getByAcp(acp);
         assertThat(returned_list_orders.get(0).getAcp().equals(acp));
@@ -80,7 +86,7 @@ class OrdersServiceTests {
 
         List<Order> orders = new ArrayList<Order>();
         orders.add(order);
-        Mockito.when(service.getByAcp(acp)).thenReturn(orders);
+        Mockito.when(repository.findByAcp(acp)).thenReturn(orders);
 
         ACP acp_fake = new ACP("Loja ACP fake", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         List<Order> returned_list_orders = service.getByAcp(acp_fake);
@@ -92,9 +98,8 @@ class OrdersServiceTests {
     void whenGetByValidId_returnOrderWithTrackingNumber(){
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
-
         order.setId(1L);
-        Mockito.when(service.getById(1L)).thenReturn(order);
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(order));
 
         Order returned_order = service.getById(1L);
         assertThat(returned_order.getId().equals(1L));
@@ -107,7 +112,7 @@ class OrdersServiceTests {
         Order order = new Order("cliente", acp);
 
         order.setId(1L);
-        Mockito.when(service.getById(1L)).thenReturn(order);
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(order));
 
         Order returned_order = service.getById(-1L);
         assertThat(returned_order).isNull();
@@ -119,7 +124,7 @@ class OrdersServiceTests {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         Order order = new Order("cliente", acp);
         order.setId(1L);
-        Mockito.when(service.getById(1L)).thenReturn(order);
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(order));
 
         boolean result = service.changeState_STORE_to_COURIER(1L, 123456L);
         assertThat(result).isTrue();
@@ -134,8 +139,8 @@ class OrdersServiceTests {
         Order order = new Order("cliente", acp);
         order.setId(1L);
         order.setStatus("COURIER");
-        Mockito.when(service.getById(1L)).thenReturn(order);
-        
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(order));
+
         boolean result = service.changeState_COURIER_to_ACPPOINT(1L, 123456L);
         assertThat(result).isTrue();
         assertThat(order.getStatus()).isEqualTo("ACP_POINT");
@@ -149,7 +154,7 @@ class OrdersServiceTests {
         Order order = new Order("cliente", acp);
         order.setId(1L);
         order.setStatus("ACP_POINT");
-        Mockito.when(service.getById(1L)).thenReturn(order);
+        Mockito.when(repository.findById(1L)).thenReturn(Optional.of(order));
 
         boolean result = service.changeState_ACPPOINT_to_COLLECTED(1L, 123456L);
         assertThat(result).isTrue();

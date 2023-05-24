@@ -27,7 +27,7 @@ class AcpServiceTests {
     @Test
     void whenAddValidACP_thenReturnAcpWithValidId() {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
-        Mockito.when(service.addACP(acp)).thenReturn(acp);
+        Mockito.when(repository.save(acp)).thenReturn(acp);
         acp.setId(111L);
 
         ACP savedAcp = service.addACP(acp);
@@ -39,7 +39,7 @@ class AcpServiceTests {
     void whenGetAcpByValidId_thenReturnAcp() {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         acp.setId(111L);
-        Mockito.when(service.getAcpById(111L)).thenReturn(Optional.of(acp));
+        Mockito.when(repository.findById(111L)).thenReturn(Optional.of(acp));
 
         Optional<ACP> returned_acp = service.getAcpById(111L);
         assertThat(returned_acp.get().getId().equals(acp.getId()));
@@ -51,7 +51,7 @@ class AcpServiceTests {
     @Test
     void whenGetAcpByInvalidId_thenReturnNull() {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
-        Mockito.when(service.getAcpById(acp.getId())).thenReturn(Optional.of(acp));
+        Mockito.when(repository.findById(acp.getId())).thenReturn(Optional.of(acp));
 
         Optional<ACP> returned_acp = service.getAcpById(-1L);
         assertThat(returned_acp).isNotPresent();
@@ -67,7 +67,7 @@ class AcpServiceTests {
         allACPs.add(acp1);
         allACPs.add(acp2);
         allACPs.add(acp3);
-        Mockito.when(service.getAllAcps()).thenReturn(allACPs);
+        Mockito.when(repository.findAll()).thenReturn(allACPs);
 
         List<ACP> returned_list_acp = service.getAllAcps();
 
@@ -78,7 +78,7 @@ class AcpServiceTests {
     @Test
     void whenPerformLoginWithValidCredentials_thenReturnTrue() {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
-        Mockito.when(service.performLogin(acp.getEmail(),acp.getPassword())).thenReturn(true);
+        Mockito.when(repository.findByEmail(acp.getEmail())).thenReturn(Optional.of(acp));
 
         Boolean isAuthenticated = service.performLogin("lojaAcp@mail.com", "pw_acp");
         
@@ -89,7 +89,7 @@ class AcpServiceTests {
     @Test
     void whenPerformLoginWithInvalidCredentials_thenReturnFalse() {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
-        Mockito.when(service.performLogin(acp.getEmail(),"fakepw")).thenReturn(false);
+        Mockito.when(repository.findByEmail(acp.getEmail())).thenReturn(Optional.of(acp));
 
         Boolean isAuthenticated = service.performLogin("lojaAcp@mail.com", "fakepw");
         

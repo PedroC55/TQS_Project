@@ -8,6 +8,9 @@ import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
 import org.mockito.junit.jupiter.MockitoExtension;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import java.util.Optional;
+
 import tqs.project.mailMoverPlatform.entities.Admin;
 import tqs.project.mailMoverPlatform.repositories.AdminRepository;
 import tqs.project.mailMoverPlatform.services.AdminServiceImpl;
@@ -25,7 +28,7 @@ class AdminsServiceTests {
     void whenAddValidAdmin_thenReturnAdminWithValidId(){
         Admin admin = new Admin("admin@mail.com", "pw_admin");
         admin.setId(111L);
-        Mockito.when(service.addAdmin(admin)).thenReturn(admin);
+        Mockito.when(repository.save(admin)).thenReturn(admin);
 
         Admin savedAdmin = service.addAdmin(admin);
         assertThat(savedAdmin.getId().equals(admin.getId()));
@@ -35,7 +38,7 @@ class AdminsServiceTests {
     @Test
     void whenPerformLoginWithValidCredentials_thenReturnTrue(){
         Admin admin = new Admin("admin@mail.com", "pw_admin");
-        Mockito.when(service.performLogin(admin.getEmail(),admin.getPassword())).thenReturn(true);
+        Mockito.when(repository.findByEmail(admin.getEmail())).thenReturn(Optional.of(admin));
 
         Boolean isAuthenticated = service.performLogin("admin@mail.com", "pw_admin");
 
@@ -46,7 +49,7 @@ class AdminsServiceTests {
     @Test
     void whenPerformLoginWithInvalidCredentials_thenReturnFalse(){
         Admin admin = new Admin("admin@mail.com", "pw_admin");
-        Mockito.when(service.performLogin(admin.getEmail(),"fakepw")).thenReturn(false);
+        Mockito.when(repository.findByEmail(admin.getEmail())).thenReturn(Optional.of(admin));
 
         Boolean isAuthenticated = service.performLogin("admin@mail.com", "fakepw");
 
