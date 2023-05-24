@@ -68,7 +68,7 @@ const productData = [
       productType: "sneakers",
       price: 258,
       rating: 5,
-      timeLeft: 1,
+      timeLeft: 2,
       totalSales: 200 
     },
     {

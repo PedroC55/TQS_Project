@@ -41,7 +41,7 @@ nav {
 }
 .primary-button {
   padding: 0.9rem 1.75rem;
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   outline: none;
   border: none;
   border-radius: 5rem;
@@ -49,6 +49,17 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;
+}
+.product-details-btn {
+  padding: 0.9rem 1.75rem;
+  background-color: rgb(246, 112, 2);
+  outline: none;
+  border: none;
+  border-radius: 5rem;
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: 0.2s;  
 }
 .navbar-cart-icon {
   font-size: 1.15rem;
@@ -488,7 +499,7 @@ nav {
 }
 
 .product-name {
-  font-size: 2rem;
+  font-size: 3rem;
   margin-bottom: 1rem;
   margin-top:-120px;
 }
