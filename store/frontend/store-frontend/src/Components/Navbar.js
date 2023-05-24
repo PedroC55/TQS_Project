@@ -61,7 +61,7 @@ const Navbar = () => {
         <button className='search_button'><img src={Search}/></button>
       </div>
       <div className='navbar-links-container'>
-        <a href=''>Home</a>
+        <a href='/'>Home</a>
         <a href=''>Products</a>
         <a href=''>Contact</a>
         <a href=''>

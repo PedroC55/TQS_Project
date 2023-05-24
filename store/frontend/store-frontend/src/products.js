@@ -1,6 +1,7 @@
 const productData = [
     {
       id: 1,
+      number: 1,
       name: "Jordan 1 Retro Low Dior",
       image:
         "https://images.stockx.com/images/Air-Jordan-1-Retro-Low-Dior-Product.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&fm=webp&auto=compress&dpr=2&trim=color&updated_at=1607051267&q=75",
@@ -12,6 +13,7 @@ const productData = [
     },
     {
       id: 2,
+      number: 2,
       name: "Vans Old Skool",
       image:
         "https://images.stockx.com/images/Vans-Old-Skool-Black.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&fm=webp&auto=compress&dpr=2&trim=color&updated_at=1623202831&q=75",
@@ -23,6 +25,7 @@ const productData = [
     },
     {
       id: 3,
+      number: 3,
       name: "Adidas Yeezy Boost 350 V2 Zyon",
       image:
         "https://images.stockx.com/images/adidas-Yeezy-Boost-350-V2-Zyon-Product.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&fm=webp&auto=compress&dpr=2&trim=color&updated_at=1606325931&q=75",
@@ -34,6 +37,7 @@ const productData = [
     } ,
     {
       id: 4,
+      number: 4,
       name: "New Balance 550 Brown",
       image:
         "https://images.stockx.com/images/New-Balance-550-Aime-Leon-Dore-Brown-Product.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&fm=webp&auto=compress&dpr=2&trim=color&updated_at=1657781487&q=75",
@@ -45,6 +49,7 @@ const productData = [
     } ,
     {
       id: 5,
+      number: 5,
       name: "Converse Chuck Taylor All-Star 70 Hi",
       image:
         "https://images.stockx.com/images/Converse-Chuck-Taylor-All-Star-70s-Hi-Off-White-Product.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&fm=webp&auto=compress&dpr=2&trim=color&updated_at=1606318827&q=75",
@@ -56,6 +61,7 @@ const productData = [
     },
     {
       id: 6,
+      number: 6,
       name: "Jordan 1 High OG Spider-Man Across the Spider-Verse",
       image:
         "https://images.stockx.com/images/Air-Jordan-1-High-OG-Spider-Man-Across-the-Spider-Verse-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1683568981",
@@ -67,6 +73,7 @@ const productData = [
     },
     {
       id: 7,
+      number: 7,
       name: "Puma LaMelo Ball MB.02",
       image:
         "https://images.stockx.com/images/Puma-LaMelo-Ball-MB02-Honeycomb-Product.jpg?fit=fill&bg=FFFFFF&w=700&h=500&fm=webp&auto=compress&q=90&dpr=2&trim=color&updated_at=1679680380",
@@ -78,6 +85,7 @@ const productData = [
     },
     {
       id: 8,
+      number: 8,
       name: "Nike Dunk Low Vintage Green",
       image:
         "https://images.stockx.com/images/Nike-Dunk-Low-Vintage-Green-W-Product.jpg?fit=fill&bg=FFFFFF&w=1200&h=857&fm=webp&auto=compress&dpr=2&trim=color&updated_at=1648503938&q=75",

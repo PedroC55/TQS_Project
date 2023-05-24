@@ -15,7 +15,7 @@ export function Products(props){
         <div className='productList'>
             
                 <div key={props.id} className='productCard'  >
-                    <Link to={"/ProductPage"}></Link>
+                   
                         <img src={props.image} alt='product-img' className='productImage'></img>
 
 
@@ -24,7 +24,7 @@ export function Products(props){
                         <FaFireAlt className={"productCard__fastSelling"} />
 
                         <div className='productCard__content'>
-                            <Link to={"/ProductPage"}>{props.name}</Link>
+                            <Link to={`/ProductPage/${props.name}`} state={{data: data}}>{props.name}</Link>
                             <div className='displayStack__1'>
                                 <div className='productPrice'>${props.price}</div>
                                 <div className='productSales'>{props.totalSales} units sold</div>
