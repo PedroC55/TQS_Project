@@ -9,7 +9,7 @@ export default function Navbar() {
     return (
 
         <nav>
-            <label class="logo">MailMover™</label>
+            <label class="logo">MailMover™admin</label>
             <ul>
             
             </ul>
