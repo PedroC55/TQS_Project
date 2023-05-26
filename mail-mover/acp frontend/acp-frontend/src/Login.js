@@ -25,7 +25,7 @@ export default function Login() {
                     <TextField sx={{backgroundColor:'white'}} label="Password" variant="outlined" margin="normal" type="password" fullWidth />
                     <div style={{display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px'}}>
                         <Link to="/Main">
-                            <Button sx={{color: 'black' , backgroundColor: '#feb236'}} size="large" variant="contained" type="submit" >
+                            <Button sx={{color: 'white' , backgroundColor: '#feb236'}} size="large" variant="contained" type="submit" >
                                 Login
                             </Button>
                         </Link>
