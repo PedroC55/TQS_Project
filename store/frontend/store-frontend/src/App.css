@@ -60,6 +60,7 @@ nav {
   cursor: pointer;
   font-weight: 600;
   transition: 0.2s;  
+  
 }
 .navbar-cart-icon {
   font-size: 1.15rem;
@@ -508,6 +509,9 @@ nav {
   margin-top: 1rem;
   margin-left: 10px;
   font-size: 18px;
+
+  justify-content: space-between;
+
 }
 
 .product-details p {

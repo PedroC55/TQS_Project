@@ -16,9 +16,7 @@ export const Home = () => {
             <h1 className='primary-heading'>
               The Dunk Low Paris!! Now Available!
             </h1>
-            <button className='secondary-button'>
-              Order Now <FiArrowRight/>
-            </button>
+            
           </div>
           <div className='home-image-container'>
             <img src={BannerImage} alt=""/>

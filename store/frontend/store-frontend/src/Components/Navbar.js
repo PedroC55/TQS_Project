@@ -64,10 +64,10 @@ const Navbar = () => {
         <a href='/'>Home</a>
         <a href=''>Products</a>
         
-        <a href=''>
+        <a href='/cart'>
           <BsCart2 className='navbar-cart-icon'/>
         </a>
-        <button className='primary-button'>Booking Now</button>
+        
       </div>
       <div className='navbar-menu-container'>
         <HiOutlineBars3 onClick={() => setOpenMenu(true)}/>
