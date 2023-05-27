@@ -54,17 +54,16 @@ const Navbar = () => {
   return (
     <nav>
       <div className='nav-logo-container'>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="" href='/'/>
       </div>
       <div className='search'>
         <input type="text" className='search_input' placeholder='Enter your shoe..'></input>
         <button className='search_button'><img src={Search}/></button>
       </div>
       <div className='navbar-links-container'>
-        <a href=''>Home</a>
-        <a href=''>About</a>
-        <a href=''>Testimonials</a>
-        <a href=''>Contact</a>
+        <a href='/'>Home</a>
+        <a href=''>Products</a>
+        
         <a href=''>
           <BsCart2 className='navbar-cart-icon'/>
         </a>
