@@ -71,7 +71,7 @@ public class AcpController {
 
     @PostMapping("/login")
     public ResponseEntity<Boolean> login(@RequestBody LoginInfo loginInfo) {
-        boolean auth = service.performLogin(loginInfo.getEmail(), loginInfo.getPassword());
+        Boolean auth = service.performLogin(loginInfo.getEmail(), loginInfo.getPassword());
         if (auth) {
             return new ResponseEntity<Boolean>(auth, HttpStatus.UNAUTHORIZED);
         } else {
