@@ -1,15 +1,21 @@
 import React from "react";
 import '../App.css';
+import { useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import BannerBackground from "../Assets/home-banner-background.png"
 import {FaStar} from 'react-icons/fa';
+import { ShopContext } from "../context/shop-context";
 
 
 export default function ProductPage(props) {
   
-  const location = useLocation();
+  const { addToCart, cartItems } = useContext(ShopContext);
 
   
+  const location = useLocation();
+
+
+
 
   return (
     <div className='home-container'>
@@ -28,7 +34,7 @@ export default function ProductPage(props) {
                 <p><b>Price:</b> {location.state.data.price}€</p>    
                 <p><b>Rating:</b> <FaStar/> {location.state.data.rating}</p>
                 <p><b>Time left:</b> {location.state.data.timeLeft} days</p> 
-                  <button className="product-details-btn" >
+                  <button className="product-details-btn" onClick={() => addToCart(location.state.data.id)} >
                     Add To Cart 
                   </button>
                 <p><b>Total sales:</b> {location.state.data.totalSales}</p> 

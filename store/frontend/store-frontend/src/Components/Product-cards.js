@@ -9,7 +9,8 @@ import ProductPage from './ProductPage';
 export function Products(props){
     const [data, setData] = useState(props);
 
-    
+
+
     return(
         
         <div className='productList'>
@@ -26,7 +27,7 @@ export function Products(props){
                         <div className='productCard__content'>
                             <Link to={`/ProductPage/${props.name}`} state={{data: data}}>{props.name}</Link>
                             <div className='displayStack__1'>
-                                <div className='productPrice'>${props.price}</div>
+                                <div className='productPrice'>{props.price}€</div>
                                 <div className='productSales'>{props.totalSales} units sold</div>
                             </div>
                             <div className='displayStack__2'>
