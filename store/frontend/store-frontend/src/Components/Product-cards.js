@@ -20,7 +20,7 @@ export function Products(props){
                         <img src={props.image} alt='product-img' className='productImage'></img>
 
 
-                        <FaShoppingCart className={"productCard__cart"} />
+                        
                         <FaRegBookmark className={"productCard__wishlist"} />
                         <FaFireAlt className={"productCard__fastSelling"} />
 

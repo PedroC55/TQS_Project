@@ -45,18 +45,11 @@ code {
   background-size: cover;
 }
 
-.productCard__cart{
-  position: absolute;
-  right: 0;
-  margin: 1rem;
-  font-size: 2rem;
-  transition: 0.2s;
-  cursor: pointer;
-}
+
 
 .productCard__wishlist{
   position: absolute;
-  right: 3rem;
+  right: 0rem;
   margin: 1rem;
   font-size: 2rem;
   transition: 0.2s;

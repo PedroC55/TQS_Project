@@ -5,6 +5,7 @@ import { useLocation } from 'react-router-dom';
 import BannerBackground from "../Assets/home-banner-background.png"
 import {FaStar} from 'react-icons/fa';
 import { ShopContext } from "../context/shop-context";
+import { BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
 
 
 export default function ProductPage(props) {
@@ -34,9 +35,15 @@ export default function ProductPage(props) {
                 <p><b>Price:</b> {location.state.data.price}€</p>    
                 <p><b>Rating:</b> <FaStar/> {location.state.data.rating}</p>
                 <p><b>Time left:</b> {location.state.data.timeLeft} days</p> 
-                  <button className="product-details-btn" onClick={() => addToCart(location.state.data.id)} >
+                  {/*<button className="product-details-btn" onClick={() => addToCart(location.state.data.id)} >
                     Add To Cart 
-                  </button>
+                  </button>*/}
+                  <Link to={`/Checkout/${location.state.data.name}`} state={{data: location}}>
+                    <button className="product-details-btn" onClick={() => addToCart(location.state.data.id)} >
+                      Buy Now
+                    </button>
+                  </Link>
+                  
                 <p><b>Total sales:</b> {location.state.data.totalSales}</p> 
                 
               </div>

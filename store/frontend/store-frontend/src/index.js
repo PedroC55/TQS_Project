@@ -7,6 +7,8 @@ import { createBrowserRouter, RouterProvider,   BrowserRouter } from 'react-rout
 import ProductPage from './Components/ProductPage';
 import Navbar from './Components/Navbar';
 import {Cart} from './Components/cart.jsx';
+import Checkout from './Components/Checkout.js';
+import {ProductsPage} from './Components/ProductsPage';
 import { ShopContextProvider } from "./context/shop-context";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -25,6 +27,8 @@ root.render(
               <Route path="/" element={<App/>} />
               <Route path="/ProductPage/:productId" element={<ProductPage/>} />
               <Route path="/cart" element={<Cart />} />
+              <Route path="/Checkout/:productName" element={<Checkout />} />
+              <Route path="/AllProducts" element={<ProductsPage />} />
         </Routes>
       </Router>
     </ShopContextProvider>

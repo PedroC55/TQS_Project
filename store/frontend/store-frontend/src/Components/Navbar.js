@@ -3,6 +3,7 @@ import Logo from "../Assets/Logo.png";
 import Search from "../Assets/search.png"
 import { BsCart2 } from "react-icons/bs";
 import { HiOutlineBars3 } from "react-icons/hi2";
+import { Link } from 'react-router-dom';
 
 import {
   Box,
@@ -62,11 +63,11 @@ const Navbar = () => {
       </div>
       <div className='navbar-links-container'>
         <a href='/'>Home</a>
-        <a href=''>Products</a>
+        <a href='/AllProducts'>Products</a>
         
-        <a href='/cart'>
+        <Link to={`/cart`}>
           <BsCart2 className='navbar-cart-icon'/>
-        </a>
+        </Link>
         
       </div>
       <div className='navbar-menu-container'>
