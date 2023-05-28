@@ -1,6 +1,6 @@
 package tqs.project.mailMoverPlatform.controllerTests;
 
-import static org.hamcrest.CoreMatchers.is;
+
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;

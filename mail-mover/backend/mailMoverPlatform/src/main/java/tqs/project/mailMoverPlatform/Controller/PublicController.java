@@ -111,4 +111,21 @@ public class PublicController {
         return service.changeState_STORE_to_COURIER(id, ts);
     }
 
+    @GetMapping("/all")
+    public ArrayList<HashMap<String,String>> getAllAcps() {
+        List<ACP> allAcps = acp_service.getAllAcps();
+        ArrayList<HashMap<String,String>> ret_list = new ArrayList<>();
+
+        for (ACP acp : allAcps){
+            HashMap<String,String> acpInfo = new HashMap<>();
+            acpInfo.put("id",acp.getId().toString());
+            acpInfo.put("name",acp.getName());
+            acpInfo.put("address",acp.getAddress());
+            acpInfo.put("email",acp.getEmail());
+            ret_list.add(acpInfo);
+        }
+
+        return ret_list;
+    }
+
 }
