@@ -45,7 +45,7 @@ import { useEffect } from 'react';
       createEntry('ACP1', 14231,"José Lopes","No ponto"),
       createEntry('ACP2', 23212,"Ana Ferreira","Na Loja"),
       createEntry('ACP2', 83731,"Luís Monteiro","Com estafeta"),
-      createEntry('ACP3', 42132,"Joana Antunes","Com estafeta"),
+      createEntry('ACP3', 42132,"Joana Antun  es","Com estafeta"),
       createEntry('ACP4', 12313,"Filipa Ribeiro","Entregue"),
       
     ];
@@ -71,7 +71,10 @@ export default function Main () {
   
   const [data, setData] = useState(null);
   const [acps, setAcps] = useState([]);
-
+  const [acpNameInput, setAcpNameInput] = useState('');
+  const [addressInput, setAddressInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
+  const [passwordInput, setPasswordInput] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -88,7 +91,40 @@ export default function Main () {
     fetchData();
   }, []);
 
+  const handleAcpInputChange = (event) => {
+    setAcpNameInput(event.target.value);
+  };
 
+  const handleAddressInputChange = (event) => {
+    setAddressInput(event.target.value);
+  };
+
+  const handleEmailInputChange = (event) => {
+    setEmailInput(event.target.value);
+  };
+
+  const handlePasswordInputChange = (event) => {
+    setPasswordInput(event.target.value);
+  };
+
+  const handleAddAcp = async () => {
+    try {
+      const response = await axios.post('http://192.168.1.71:8080/v1/acp/new', {
+        address: addressInput,
+        email: emailInput,
+        name: acpNameInput,
+        password: passwordInput
+      });
+
+      // Handle the response as needed
+      console.log('ACP added successfully:', response.data);
+
+      // Close the modal
+      handleClose();
+    } catch (error) {
+      console.error('Error adding ACP:', error);
+    }
+  };
  
 
   
@@ -133,10 +169,7 @@ export default function Main () {
   const [descriptionInput, setDescriptionInput] = useState('');
 
   
-  const handleAcpInputChange = (event) => {
-    setAcpInput(event.target.value);
-  };
-
+  
   const handleDescriptionInputChange = (event) => {
     setDescriptionInput(event.target.value);
   };
@@ -242,35 +275,62 @@ export default function Main () {
           
           
           
-          <div className='button'>
-            <Button onClick={handleOpen} variant="contained">Add ACP</Button>
-            <Modal
-              open={open}
-              onClose={handleClose}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"      >
-              <Box sx={style}>
-              <Box
-                  component="form"
-                  sx={{
-                    '& > :not(style)': { m: 1, width: '25ch' },
-                  }}
-                  noValidate
-                  autoComplete="off"
-                >
-                  <Typography>ACP</Typography>
-                  <TextField id="standard-basic" label="ACP" variant="filled" 
-                    value={acpInput}
-                    onChange={handleAcpInputChange} />
-                  <Typography>Description</Typography>
-                  <TextField id="standard-basic" label="Description" variant="filled" 
-                    value={descriptionInput}
-                    onChange={handleDescriptionInputChange} />
-                  <Button sx={{ backgroundColor: "#152238" }} variant="contained">Add ACP</Button>
-                </Box>
-              </Box>
-            </Modal>
-        </div>
+          <div className="button">
+        <Button onClick={handleOpen} variant="contained">Add ACP</Button>
+        <Modal
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="modal-modal-title"
+          aria-describedby="modal-modal-description"
+        >
+          <Box sx={style}>
+            <Box
+              component="form"
+              sx={{
+                '& > :not(style)': { m: 1, width: '25ch' },
+              }}
+              noValidate
+              autoComplete="off"
+            >
+              <Typography>Name</Typography>
+              <TextField
+                id="standard-basic"
+                label="ACP"
+                variant="filled"
+                value={acpNameInput}
+                onChange={handleAcpInputChange}
+              />
+              <Typography>Address</Typography>
+              <TextField
+                id="standard-basic"
+                label="Description"
+                variant="filled"
+                value={addressInput}
+                onChange={handleAddressInputChange}
+              />
+              <Typography>Email</Typography>
+              <TextField
+                id="standard-basic"
+                label="ACP"
+                variant="filled"
+                value={emailInput}
+                onChange={handleEmailInputChange}
+              />
+              <Typography>Password</Typography>
+              <TextField
+                id="standard-basic"
+                label="ACP"
+                variant="filled"
+                value={passwordInput}
+                onChange={handlePasswordInputChange}
+              />
+              <Button sx={{ backgroundColor: "#152238" }} variant="contained" onClick={handleAddAcp}>
+                Add ACP
+              </Button>
+            </Box>
+          </Box>
+        </Modal>
+      </div>
         </div>
       )}     
        
