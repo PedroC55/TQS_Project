@@ -9,6 +9,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './Main.css';
 import { Box, Button, Modal, TextField, Typography , Menu,  MenuItem, Select, Tabs, Tab} from '@mui/material';
+import axios from 'axios';
+import { useEffect } from 'react';
+
+
+
+
+
 
     const StyledTableCell = styled(TableCell)(({ theme }) => ({
       [`&.${tableCellClasses.head}`]: {
@@ -61,6 +68,32 @@ export default function Main () {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+  
+  const [data, setData] = useState(null);
+  const [acps, setAcps] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://192.168.1.71:8080/v1/acp/all');
+        setData(response.data);
+        /*console.log(response.data);*/
+        setAcps(response.data);
+        console.log(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+
+ 
+
+  
+  
+  
   const [rows, setRows] = useState([
     { ACP: 'ACP 1', trackingNumber: '123', user: 'User 1', state: 'Na Loja' },
     { ACP: 'ACP 2', trackingNumber: '132', user: 'User 2', state: 'Com estafeta' },
@@ -85,15 +118,14 @@ export default function Main () {
     setActiveTab(newValue);
   };
 
-  const [acps, setAcps] = useState([
-    { ACP: 'ACP 1' , description: 'ACP 1 Point '},
-    { ACP: 'ACP 2' , description: 'ACP 2 Point'}]);
 
-  const handleDeleteRow = (index) => {
-    const updatedAcps = [...acps];
-    updatedAcps.splice(index, 1);
-    setAcps(updatedAcps);
-  };
+  
+ 
+  
+
+
+
+
 
 
 
@@ -111,24 +143,16 @@ export default function Main () {
 
 
 
-  const handleAddAcp = () => {
-    const newAcp = {
-      ACP: acpInput,
-      description: descriptionInput,
-    };
-
-    setAcps([...acps, newAcp]);
-
-    setAcpInput('');
-    setDescriptionInput('');
-    setOpen(false);
-  };
 
 
+  if(!data) {
+    return (
+      <div>No data</div>
+    )
+  }
 
 
-
-
+  
 
 
 
@@ -184,27 +208,35 @@ export default function Main () {
          {activeTab === 1 && (
         <div className='acp-table'>
           <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 800}} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                          <StyledTableCell align="right">ACP</StyledTableCell>
-                          <StyledTableCell align="right">Description</StyledTableCell>  
-                          <StyledTableCell align="right">Actions</StyledTableCell>                    
-                        </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {acps.map((row , index) => (
-                          <StyledTableRow key={row.ACP}>
-                            <StyledTableCell align="right">{row.ACP}</StyledTableCell>
-                            <StyledTableCell align="right">{row.description}</StyledTableCell> 
-                            <StyledTableCell align="right">
-                              <Button sx={{backgroundColor: '#8B0000'}} variant="contained" onClick={() => handleDeleteRow(index)}>Remove ACP</Button>
-                            </StyledTableCell>              
-                          </StyledTableRow>
-                        ))}
-                  </TableBody>
-              </Table>
-             </TableContainer>
+            <Table sx={{ minWidth: 800 }} aria-label="customized table">
+              <TableHead>
+                <TableRow>
+                  <StyledTableCell align="right">ACP</StyledTableCell>
+                  <StyledTableCell align="right">Address</StyledTableCell>
+                  <StyledTableCell align="right">Email</StyledTableCell>
+                  <StyledTableCell align="right">Actions</StyledTableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {acps.map((row, index) => (
+                  <StyledTableRow key={row.id}>
+                    <StyledTableCell align="right">{row.name}</StyledTableCell>
+                    <StyledTableCell align="right">{row.address}</StyledTableCell>
+                    <StyledTableCell align="right">{row.email}</StyledTableCell>
+                    <StyledTableCell align="right">
+                      <Button
+                        sx={{ backgroundColor: '#8B0000' }}
+                        variant="contained"
+                      >
+                        Remove ACP
+                      </Button>
+                    </StyledTableCell>
+                  </StyledTableRow>
+                ))}
+              </TableBody>
+            </Table>
+          </TableContainer>
+                    
           
           
           
@@ -234,7 +266,7 @@ export default function Main () {
                   <TextField id="standard-basic" label="Description" variant="filled" 
                     value={descriptionInput}
                     onChange={handleDescriptionInputChange} />
-                  <Button sx={{ backgroundColor: "#152238" }} variant="contained" onClick={handleAddAcp}>Add ACP</Button>
+                  <Button sx={{ backgroundColor: "#152238" }} variant="contained">Add ACP</Button>
                 </Box>
               </Box>
             </Modal>
