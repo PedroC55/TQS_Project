@@ -1,6 +1,5 @@
 package tqs.project.mailMoverPlatform.controllerTests;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -52,7 +51,7 @@ public class OrdersControllerMockMvcTest {
         given(orderService.addOrder(order)).willReturn(order);
 
         mockMvc.perform(post("/v1/orders/new/{clientname}/{acp_id}", "cliente1", 1L)
-                .contentType(MediaType.APPLICATION_JSON))
+                    .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.clientName").value("Client1"))
@@ -79,7 +78,8 @@ public class OrdersControllerMockMvcTest {
 
         given(orderService.getAllOrders()).willReturn(allOrders);
 
-        mockMvc.perform(get("/v1/orders/all").contentType(MediaType.APPLICATION_JSON))
+        mockMvc.perform(get("/v1/orders/all")
+                    .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[0].clientName").value("cliente1"))
@@ -115,7 +115,8 @@ public class OrdersControllerMockMvcTest {
 
         given(orderService.getByAcp(acp)).willReturn(allOrders);
 
-        mockMvc.perform(get("/v1/orders/byAcp/{acp_id}", 1L))
+        mockMvc.perform(get("/v1/orders/byAcp/{acp_id}", 1L)
+                    .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[0].id").value(1L))
                 .andExpect(jsonPath("$[0].clientName").value("cliente1"))
@@ -144,7 +145,8 @@ public class OrdersControllerMockMvcTest {
         given(orderService.getById(1L)).willReturn(order);
 
         // Perform the GET request and validate the response
-        mockMvc.perform(get("/v1/orders/byId/{id}", 1L))
+        mockMvc.perform(get("/v1/orders/byId/{id}", 1L)
+                    .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1L))
                 .andExpect(jsonPath("$.clientName").value("cliente1"))

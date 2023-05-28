@@ -48,9 +48,9 @@ public class AcpControllerMockMvcTest {
                 .content(asJsonString(acp))
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON))
-            //.andExpect(MockMvcResultMatchers.status().isCreated())
-            //.andExpect(jsonPath("$.name", is("Loja ACP")))
+            .andExpect(MockMvcResultMatchers.status().isCreated())
             .andExpect(jsonPath("$.id").exists())
+            .andExpect(jsonPath("$.name", is("Loja ACP")))
             .andReturn().getResponse().getContentAsString();
     }
 
@@ -110,8 +110,8 @@ public class AcpControllerMockMvcTest {
         mockMvc.perform(post("/v1/acp/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(loginInfo)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("true"));
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
     }
 
     @Test
@@ -123,8 +123,8 @@ public class AcpControllerMockMvcTest {
         mockMvc.perform(post("/v1/acp/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(loginInfo)))
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-                .andExpect(MockMvcResultMatchers.content().string("false"));
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().string("false"));
     }
 
     public static String asJsonString(final Object obj) {

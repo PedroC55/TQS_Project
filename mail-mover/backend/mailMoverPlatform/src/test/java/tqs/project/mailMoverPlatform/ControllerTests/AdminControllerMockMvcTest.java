@@ -8,10 +8,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +15,6 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -46,9 +41,9 @@ public class AdminControllerMockMvcTest {
         given(adminService.addAdmin(newAdmin)).willReturn(newAdmin);
 
         mockMvc.perform(post("/v1/admin/new")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(newAdmin)))
-                //.andExpect(status().isCreated())
+                    .content(asJsonString(newAdmin))
+                    .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.email").value("admin@mail.com"))
                 .andExpect(jsonPath("$.password").value("admin_123"));
     }
@@ -60,10 +55,10 @@ public class AdminControllerMockMvcTest {
         given(adminService.performLogin("admin@mail.com", "admin_123")).willReturn(true);
 
         mockMvc.perform(post("/v1/admin/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(loginInfo)))
-                .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().string("true"));
+                    .content(asJsonString(loginInfo))
+                    .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(content().string("true"));
     }
 
     @Test
@@ -73,10 +68,10 @@ public class AdminControllerMockMvcTest {
         given(adminService.performLogin("admin@mail.com", "admin_123")).willReturn(false);
 
         mockMvc.perform(post("/v1/admin/login")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(asJsonString(loginInfo)))
-                .andExpect(MockMvcResultMatchers.status().isUnauthorized())
-                .andExpect(MockMvcResultMatchers.content().string("false"));
+                    .content(asJsonString(loginInfo))
+                    .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isUnauthorized())
+                .andExpect(content().string("false"));
     }
 
     public static String asJsonString(final Object obj) {
