@@ -8,7 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import './Main.css';
-import { Box, Button, Modal, TextField, Typography , Menu,  MenuItem, Select, Tabs, Tab} from '@mui/material';
+import { Box, Button, Modal, TextField, Typography , Menu,  MenuItem, Select, Tabs, Tab, IconButton} from '@mui/material';
+import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+
 import axios from 'axios';
 import { useEffect } from 'react';
 
@@ -37,19 +39,7 @@ import { useEffect } from 'react';
       },
     }));
 
-    function createEntry(ACP, trackingNumber , user, state) {
-      return { ACP, trackingNumber, user, state};
-    }
-    
-    const rows = [
-      createEntry('ACP1', 14231,"José Lopes","No ponto"),
-      createEntry('ACP2', 23212,"Ana Ferreira","Na Loja"),
-      createEntry('ACP2', 83731,"Luís Monteiro","Com estafeta"),
-      createEntry('ACP3', 42132,"Joana Antun  es","Com estafeta"),
-      createEntry('ACP4', 12313,"Filipa Ribeiro","Entregue"),
-      
-    ];
-
+  
     
 
     const style = {
@@ -68,9 +58,11 @@ export default function Main () {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  
-  const [data, setData] = useState(null);
+
+  const [ACP_data, setAcp_Data] = useState(null);
+  const [Order_data , setOrder_data] = useState(null);
   const [acps, setAcps] = useState([]);
+  const [orders, setOrders] = useState([]);
   const [acpNameInput, setAcpNameInput] = useState('');
   const [addressInput, setAddressInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
@@ -78,11 +70,13 @@ export default function Main () {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://192.168.1.71:8080/v1/acp/all');
-        setData(response.data);
+        const response1 = await axios.get('http://192.168.1.71:8080/v1/acp/all');
+        const response2 = await axios.get('http://192.168.1.71:8080/v1/orders/all');
+        setOrder_data(response2.data);
+        setAcp_Data(response1.data);
         /*console.log(response.data);*/
-        setAcps(response.data);
-        console.log(response.data);
+        setAcps(response1.data);
+        setOrders(response2.data);
       } catch (error) {
         console.error(error);
       }
@@ -130,23 +124,8 @@ export default function Main () {
   
   
   
-  const [rows, setRows] = useState([
-    { ACP: 'ACP 1', trackingNumber: '123', user: 'User 1', state: 'Na Loja' },
-    { ACP: 'ACP 2', trackingNumber: '132', user: 'User 2', state: 'Com estafeta' },
-    { ACP: 'ACP 2', trackingNumber: '456', user: 'User 3', state: 'Com estafeta' },
-    { ACP: 'ACP 3', trackingNumber: '445', user: 'User 4', state: 'No ponto' },
-    { ACP: 'ACP 4', trackingNumber: '743', user: 'User 5', state: 'Entregue' }
-  ]);
-  const handleStateChange = (newState, trackingNumber) => {
-    setRows((prevRows) => {
-      return prevRows.map((row) => {
-        if (row.trackingNumber === trackingNumber) {
-          return { ...row, state: newState };
-        }
-        return row;
-      });
-    });
-  };
+ 
+  
 
   const [activeTab, setActiveTab] = useState(0);
 
@@ -155,30 +134,47 @@ export default function Main () {
   };
 
 
-  
- 
-  
 
+  const handleFilterByAcp = async () => {
+    try {
+      const acpId = document.getElementById('acpId').value; // Get the ACP ID from the TextField
 
-
-
-
-
-
-  const [acpInput, setAcpInput] = useState('');
-  const [descriptionInput, setDescriptionInput] = useState('');
-
-  
-  
-  const handleDescriptionInputChange = (event) => {
-    setDescriptionInput(event.target.value);
+      const response = await axios.get(`http://192.168.1.71:8080/v1/orders/byAcp/${acpId}`);
+      console.log(response.data);
+      const filteredOrders = response.data; // Assuming the response data is an array of orders
+      setOrders(filteredOrders); // Update the orders array with the filtered data
+    } catch (error) {
+      console.log('Error:', error);
+    }
   };
 
+  const handleFilterById = async () => {
+    try {
+      const orderId = document.getElementById('orderId').value; // Get the ACP ID from the TextField
 
+      const response = await axios.get(`http://192.168.1.71:8080/v1/orders/byId/${orderId}`);
+      const order = response.data; // Assuming the response data is an array of orders
+      console.log(response.data);
+      if (order && order.id) {
+        setOrders([order]); // Wrap the single order in an array and update the orders state
+      } else {
+        setOrders([]); // If no order is found or the order ID is undefined, set the orders state to an empty array
+      }
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
 
-
-
-  if(!data) {
+  const handleFilterReset = async () => {
+    try {
+      const response = await axios.get(`http://192.168.1.71:8080/v1/orders/all`);
+      console.log(response.data);
+      setOrders(response.data); 
+    } catch (error) {
+      console.log('Error:', error);
+    }
+  };
+  if(!ACP_data || !Order_data) {
     return (
       <div>No data</div>
     )
@@ -200,30 +196,61 @@ export default function Main () {
           </Tabs>
         </div>
         {activeTab === 0 && (
+                <>
+                  <div className='filers'>
+                    <TextField
+                        id="acpId"
+                        label="Fitler by ACP"
+                        variant="standard"
+                        style={{marginLeft:'200px'}}
+                        
+                      />
+                    <IconButton aria-label="filter"  style={{ marginLeft: '10px', marginTop: '15px' ,backgroundColor: '#152238', borderRadius: 0 , color: 'white', width: '32px',height: '32px'}} onClick={handleFilterByAcp}>
+                      <ArrowForwardIcon />
+                    </IconButton>   
+                    <TextField
+                        id="orderId"
+                        label="Fitler by Id"
+                        variant="standard"
+                        style={{marginLeft:'30px'}}
+                        
+                      />
+                    <IconButton aria-label="filter"  style={{ marginLeft: '10px', marginTop: '15px' ,backgroundColor: '#152238', borderRadius: 0 , color: 'white', width: '32px',height: '32px'}} onClick={handleFilterById}>
+                      <ArrowForwardIcon />
+                    </IconButton>  
+                    
+                    <Button style={{ marginLeft: '300px', marginTop: '15px' ,backgroundColor: '#152238', borderRadius: 0 , color: 'white'}} onClick={handleFilterReset}>Reset Filters</Button>
+                                 
+                  </div>
+                  
                   <div  style={{ marginBottom: '100px' }} className='table'>
                   <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 800}} aria-label="customized table">
                       <TableHead>
-                        <TableRow>
-                          
-                          <StyledTableCell align="right">ACP</StyledTableCell>
-                          <StyledTableCell align="right">Tracking Number</StyledTableCell>
-                          <StyledTableCell align="right">User</StyledTableCell>
-                          <StyledTableCell align="right">State</StyledTableCell>
-                          <StyledTableCell align="right">Change State</StyledTableCell>
+                        <TableRow>        
+                          <StyledTableCell align="right">Order Id</StyledTableCell>
+                          <StyledTableCell align="right">ACP Delivery Date</StyledTableCell>
+                          <StyledTableCell align="right">Client Name</StyledTableCell>
+                          <StyledTableCell align="right">Client Pick Up Date </StyledTableCell>
+                          <StyledTableCell align="right">ACP Id</StyledTableCell>
+                          <StyledTableCell align="right">Store Pick Up Date</StyledTableCell>
+                          <StyledTableCell align="right">Status</StyledTableCell>  
+                          <StyledTableCell align="right">Change Status</StyledTableCell> 
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows.map((row) => (
-                          <StyledTableRow key={row.trackingNumber}>
-                            <StyledTableCell align="right">{row.ACP}</StyledTableCell>
-                            <StyledTableCell align="right">{row.trackingNumber}</StyledTableCell>
-                            <StyledTableCell align="right">{row.user}</StyledTableCell>
-                            <StyledTableCell align="right">{row.state}</StyledTableCell>
+                        {orders.map((row , index) => (
+                          <StyledTableRow key={row.id}>
+                            <StyledTableCell align="right">{row.id}</StyledTableCell>
+                            <StyledTableCell align="right">{row.acpDeliveryDate ?  new Date(row.acpDeliveryDate).toLocaleDateString('en-GB') : ''}</StyledTableCell>
+                            <StyledTableCell align="right">{row.clientName}</StyledTableCell>
+                            <StyledTableCell align="right">{row.clientPickUpDate ?  new Date(row.clientPickUpDate).toLocaleDateString('en-GB') : 'N/A' }</StyledTableCell>
+                            <StyledTableCell align="right">{row.acp.id}</StyledTableCell>
+                            <StyledTableCell align="right">{row.storePickUpDate ?  new Date(row.storePickUpDate).toLocaleDateString('en-GB') : 'N/A'}</StyledTableCell>
+                            <StyledTableCell align="right">{row.status}</StyledTableCell>
                             <StyledTableCell align="right">
                               <Select
-                                value={row.state}
-                                onChange={(event) => handleStateChange(event.target.value, row.trackingNumber)}
+                                value={row.status}
                               >
                                 <MenuItem value="Na Loja">Na Loja</MenuItem>
                                 <MenuItem value="Com estafeta">Com estafeta</MenuItem>
@@ -237,6 +264,7 @@ export default function Main () {
                     </Table>
                   </TableContainer>
                 </div>
+              </>
         )}
          {activeTab === 1 && (
         <div className='acp-table'>
@@ -244,6 +272,7 @@ export default function Main () {
             <Table sx={{ minWidth: 800 }} aria-label="customized table">
               <TableHead>
                 <TableRow>
+                  <StyledTableCell align="right">Id</StyledTableCell>
                   <StyledTableCell align="right">ACP</StyledTableCell>
                   <StyledTableCell align="right">Address</StyledTableCell>
                   <StyledTableCell align="right">Email</StyledTableCell>
@@ -253,6 +282,7 @@ export default function Main () {
               <TableBody>
                 {acps.map((row, index) => (
                   <StyledTableRow key={row.id}>
+                    <StyledTableCell align="right">{row.id}</StyledTableCell>
                     <StyledTableCell align="right">{row.name}</StyledTableCell>
                     <StyledTableCell align="right">{row.address}</StyledTableCell>
                     <StyledTableCell align="right">{row.email}</StyledTableCell>
