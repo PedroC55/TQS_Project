@@ -7,11 +7,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +25,7 @@ import tqs.project.mailMoverPlatform.controller.AcpController;
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.LoginInfo;
 import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
+
 
 @WebMvcTest(AcpController.class)
 public class AcpControllerMockMvcTest {
@@ -50,7 +49,7 @@ public class AcpControllerMockMvcTest {
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isCreated())
             .andExpect(jsonPath("$.id").exists())
-            .andExpect(jsonPath("$.name", is("Loja ACP")))
+            .andExpect(jsonPath("$.name").value("Loja ACP"))
             .andReturn().getResponse().getContentAsString();
     }
 

@@ -6,17 +6,18 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
 import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
 import tqs.project.mailMoverPlatform.services.OrderServiceImpl;
 
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("v1/mailMover")
 public class PublicController {

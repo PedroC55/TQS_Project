@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,7 +18,7 @@ import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.LoginInfo;
 import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
 
-
+@CrossOrigin(origins="*")
 @RestController
 @RequestMapping("v1/acp")
 public class AcpController {
@@ -32,7 +33,7 @@ public class AcpController {
         if (ret_acp == null) {
             return new ResponseEntity<ACP>(ret_acp, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<>(ret_acp, HttpStatus.CREATED);
+            return new ResponseEntity<ACP>(ret_acp, HttpStatus.CREATED);
         }
     }
 
