@@ -6,6 +6,7 @@ import BannerBackground from "../Assets/home-banner-background.png"
 import {FaStar} from 'react-icons/fa';
 import { ShopContext } from "../context/shop-context";
 import { BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 
 export default function ProductPage(props) {
@@ -20,7 +21,7 @@ export default function ProductPage(props) {
 
   return (
     <div className='home-container'>
-        
+        <Navbar></Navbar>
         <div className='home-banner-container'>
           <div className='home-bannerImage-container'>
             <img src={BannerBackground} alt=""/>

@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { ShopContext } from "../context/shop-context";
-
+import Navbar from './Navbar';
 import products from '../products'
 import { CartItem } from "./cart-item";
 import { useNavigate } from "react-router-dom";
@@ -19,6 +19,7 @@ export const Cart = () => {
 
   return (
     <div className="cart">
+      <Navbar></Navbar>
       <div>
         <h1>Your Cart Items</h1>
       </div>

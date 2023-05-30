@@ -7,9 +7,10 @@ export default class AcpList extends React.Component {
   }
 
   componentDidMount() {
-    axios.get(`https://localhost:8080/v1/all`)
+    axios.get(`http://localhost:8080/v1/mailMover/all`)
       .then(res => {
         const acps = res.data;
+        console.log(acps);
         this.setState({ acps });
       })
   }

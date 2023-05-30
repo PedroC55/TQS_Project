@@ -1,8 +1,26 @@
 import '../css/login.css';
-import profile from "../Assets/a.png";
+import profile from "../Assets/b.png";
 import email from "../Assets/email.jpg";
 import pass from "../Assets/pass.png";
+import { Link } from 'react-router-dom';
+import { useState } from 'react';
 function LoginUi() {
+  const [userText ,setUserText] = useState('');
+  const [passText ,setPassText] = useState('');
+
+  const handleUserChange = (event) => {
+    setUserText(event.target.value);
+  };
+
+  const handlePassChange = (event) => {
+    setPassText(event.target.value);
+  };
+
+  const checkUser = () => {
+    if (userText == "user" && passText == "user") {
+      window.location.href = '/app';
+    }
+  }
   return (
     <div className="main">
      <div className="sub-main">
@@ -19,14 +37,16 @@ function LoginUi() {
            <h1>Login Page</h1>
            <div>
              <img src={email} alt="email" className="email"/>
-             <input type="text" placeholder="user name" className="name"/>
+             <input name='user' type="text" placeholder="User name" className="name" value={userText} onChange={handleUserChange}/>
            </div>
            <div className="second-input">
              <img src={pass} alt="pass" className="email"/>
-             <input type="password" placeholder="user name" className="name"/>
+             <input name='pass' type="password" placeholder="Password" className="name" value={passText} onChange={handlePassChange}/>
            </div>
           <div className="login-button">
-          <button>Login</button>
+          
+            <button onClick={checkUser}>Login</button>
+          
           </div>
            
             <p className="link">

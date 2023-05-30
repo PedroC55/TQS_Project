@@ -1,6 +1,6 @@
 import '../App.css';
 import Footer from "./Footer"
-
+import Navbar from './Navbar';
 import { Products } from './Product-cards';
 import products from '../products'
 
@@ -12,7 +12,7 @@ export function ProductsPage(props) {
   return (
     
     <div className='App'>
-
+        <Navbar></Navbar>
         <div className='home-banner-container'>
 
             <div className='home-bannerImage-container'>

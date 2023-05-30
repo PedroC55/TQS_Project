@@ -54,7 +54,7 @@ class Form extends Component {
                         <input placeholder="Credit Card Number" type="number"/>
                         <AcpList></AcpList>
                     </div>
-                    <Link to={"/"}>
+                    <Link to={"/app"}>
 			    	    <button type="submit" className='submitBtn'>Submit</button>
                     </Link>
 			    </form>
