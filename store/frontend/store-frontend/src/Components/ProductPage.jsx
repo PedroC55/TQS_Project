@@ -7,7 +7,7 @@ import {FaStar} from 'react-icons/fa';
 import { ShopContext } from "../context/shop-context";
 import { BrowserRouter as Router, Route, Link, useNavigate } from 'react-router-dom';
 import Navbar from './Navbar';
-
+import { useEffect } from 'react';
 
 export default function ProductPage(props) {
   
@@ -16,7 +16,10 @@ export default function ProductPage(props) {
   
   const location = useLocation();
 
-
+  useEffect(() => {
+    document.title = "Product";
+    
+  }, []);
 
 
   return (
@@ -40,7 +43,7 @@ export default function ProductPage(props) {
                     Add To Cart 
                   </button>*/}
                   <Link to={`/Checkout/${location.state.data.name}`} state={{data: location}}>
-                    <button className="product-details-btn" onClick={() => addToCart(location.state.data.id)} >
+                    <button name="buy_now" className="product-details-btn" onClick={() => addToCart(location.state.data.id)} >
                       Buy Now
                     </button>
                   </Link>

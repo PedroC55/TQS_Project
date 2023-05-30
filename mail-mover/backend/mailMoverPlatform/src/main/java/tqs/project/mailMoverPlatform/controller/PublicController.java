@@ -55,6 +55,7 @@ public class PublicController {
         } 
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/byAcp/{acp_id}")
     public ArrayList<HashMap<String,Object>> getByAcpId(@PathVariable Long acp_id) {
         Optional<ACP> ret_acp = acp_service.getAcpById(acp_id);

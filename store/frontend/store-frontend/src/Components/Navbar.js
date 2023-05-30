@@ -63,7 +63,7 @@ const Navbar = () => {
       </div>
       <div className='navbar-links-container'>
         <a href='/app'>Home</a>
-        <a href='/AllProducts'>Products</a>
+        <a name="allProducts" href='/AllProducts'>Products</a>
         
 
         

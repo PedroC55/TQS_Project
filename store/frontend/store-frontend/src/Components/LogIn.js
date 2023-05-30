@@ -45,7 +45,7 @@ function LoginUi() {
            </div>
           <div className="login-button">
           
-            <button onClick={checkUser}>Login</button>
+            <button onClick={checkUser} name="btnLogin">Login</button>
           
           </div>
            

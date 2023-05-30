@@ -25,7 +25,7 @@ export function Products(props){
                         <FaFireAlt className={"productCard__fastSelling"} />
 
                         <div className='productCard__content'>
-                            <Link to={`/ProductPage/${props.name}`} state={{data: data}}>{props.name}</Link>
+                            <Link name="productToBuy" to={`/ProductPage/${props.name}`} state={{data: data}}>{props.name}</Link>
                             <div className='displayStack__1'>
                                 <div className='productPrice'>{props.price}€</div>
                                 <div className='productSales'>{props.totalSales} units sold</div>

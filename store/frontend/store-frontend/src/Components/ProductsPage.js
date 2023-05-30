@@ -2,13 +2,18 @@ import '../App.css';
 import Footer from "./Footer"
 import Navbar from './Navbar';
 import { Products } from './Product-cards';
-import products from '../products'
+import products from '../products';
+import { useEffect } from 'react';
 
 import BannerBackground from "../Assets/home-banner-background.png"
 
 
 
 export function ProductsPage(props) {
+  useEffect(() => {
+    document.title = "Products";
+    
+  }, []);
   return (
     
     <div className='App'>
