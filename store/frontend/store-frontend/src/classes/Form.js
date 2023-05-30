@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AcpList from "./AcpsList";
+import { Products } from '../Components/Product-cards';
 import "../css/form.css"
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -9,14 +9,16 @@ class Form extends Component {
 	constructor(props) {
 		super(props)
 
+		
 
 		this.state = {
 			username: '',
 			address: '',
 			acps: [],
-			selectedACP: ''
+			selectedACP: '12312'
 		}
 	}
+
 
 	
 
@@ -26,6 +28,7 @@ class Form extends Component {
 			const acps = res.data;
 			console.log(acps);
 			this.setState({ acps });
+			console.log(this.props.message)
 		  })
 	  }
 
@@ -44,11 +47,12 @@ class Form extends Component {
 	handleACPChange = event => {
 		const selectedKey = event.target.value;
     	this.setState({ selectedACP: selectedKey });
+		console.log(this.state.selectedACP);
 	}
 
 	handleSubmit = event => {
 		event.preventDefault();
-	
+		
 		const user = {
 		  name: this.state.username
 		  
@@ -57,13 +61,18 @@ class Form extends Component {
 		const acp_id = {
 			name: this.state.selectedACP
 		  };
-		console.log(acp_id)
-		axios.post(`http://localhost:8080/v1/mailMover/new/${user}/${acp_id}`)
+		console.log(acp_id.name)
+		const path = `http://localhost:8080/v1/mailMover/new/${user.name}/${acp_id.name}`;
+		console.log(path)
+		axios.post(path)
 		  .then(res => {
 			console.log(res);
 			console.log(res.data);
+			
+			alert(`Compra realizada com sucesso no nome de - ${this.state.username}`);
+			window.location.href = '/app';
 		  })
-		alert(`${this.state.username} ${this.state.address}`)
+		
 
 
 	  }
@@ -73,32 +82,47 @@ class Form extends Component {
 	render() {
 		const { username, address, topic, acps, selectedACP } = this.state
 		return (
-            <div className = "form-box">
-                <h3>Introduzir dados:</h3>
-			    <form onSubmit={this.handleSubmit}>
-			    	
+			<div className='big-box'>
+            	<div className = "form-box">
+            	    <h3>Enter your data:</h3>
+				    <form onSubmit={this.handleSubmit}>
 
-                    <div className="field1">
-                        <label> customer info </label>
-                        <input placeholder="Name" type="text"  value={username} onChange={this.handleUsernameChange}/>
-                        <input placeholder="Phone 123456789" type="number"/>
-                        <input placeholder="E-mail" />
-                        <textarea placeholder="Shipping Address" type="text"  value={address} onChange={this.handleAddressChange}/>
-                        <input placeholder="Credit Card Number" type="number"/>
-                        <select value={selectedACP} onChange={this.handleACPChange} >
-        					{
-        					  this.state.acps
-        					    .map(acp => {
-        					      return (<option key={acp.id} value={acp.id}>{acp.name}</option>);
-        					    })
-        					}
-      					</select>
-                    </div>
 
-			    	<button type="submit" className='submitBtn'>Submit</button>
+            	        <div className="field1">
+            	            <label> Consumer info</label>
+            	            <input placeholder="Name" type="text"  value={username} onChange={this.handleUsernameChange}/>
+            	            <input placeholder="Phone 123456789" type="number"/>
+            	            <input placeholder="E-mail" />
+            	            <textarea placeholder="Shipping Address" type="text"  value={address} onChange={this.handleAddressChange}/>
+            	            <input placeholder="Credit Card Number" type="number"/>
+            	            <select className="" value={selectedACP} onChange={this.handleACPChange}>
+        						{
+        						  this.state.acps
+        						    .map(acp => {
+        						      return (<option key={acp.id} value={acp.id}>{acp.name}</option>);
+        						    })
+        						}
+      						</select>
+            	        </div>
 
-			    </form>
-            </div>
+				    	<button type="submit" className='submitBtn'>Submit</button>
+
+				    </form>
+            	</div>
+				<div className='card-box'>
+	
+                    <Products 
+                        id={this.props.message.state.data.state.data.id}
+                        image={this.props.message.state.data.state.data.image}
+                        name={this.props.message.state.data.state.data.name}
+                        price={this.props.message.state.data.state.data.price}
+                        totalSales={this.props.message.state.data.state.data.totalSales}
+                        timeLeft={this.props.message.state.data.state.data.timeLeft}
+                        rating={this.props.message.state.data.state.data.rating}
+                    />
+ 
+                </div>
+			</div>
 		)
 	}
 }

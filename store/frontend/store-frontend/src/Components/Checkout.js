@@ -15,7 +15,7 @@ export default function Checkout(props) {
 
   
   const location = useLocation();
-  console.log(location.state.data.state.data.name);
+  
 
 
 
@@ -23,7 +23,7 @@ export default function Checkout(props) {
   return (
     <div className="App">
       <Navbar></Navbar>
-      <Form></Form>
+      <Form message={location}></Form>
     </div>
   )
 }

@@ -5,16 +5,33 @@
 
   }
 
+  .big-box{
+    display: flex;
+  }
+
+  .card-box{
+    width: 25%;
+    height: 100vh;
+    
+    flex: 0.25;
+  
+    margin: 0vw;
+  
+    position: relative;
+  }
+
+
+
   .form-box {
-    min-width: 100%;
+    width: 75%;
     height: 100vh;
     border: 1px solid rgb(255, 128, 0);
-    
-    /* border: 1px solid red; */
+    flex: 0.75;
+  
     margin: 0vw;
     padding: 5vw;
     position: relative;
-    /* position:relative for .prevBtn and .nextBtn position:absolute; */
+    
   }
   .form-box h3 {
     font-size: 35px;
@@ -67,3 +84,4 @@ textarea {
     background-color: rgb(245, 245, 78);
     transition: 1s background ease;
   }
+

@@ -65,9 +65,7 @@ const Navbar = () => {
         <a href='/app'>Home</a>
         <a href='/AllProducts'>Products</a>
         
-        <Link to={`/cart`}>
-          <BsCart2 className='navbar-cart-icon'/>
-        </Link>
+
         
       </div>
       <div className='navbar-menu-container'>
