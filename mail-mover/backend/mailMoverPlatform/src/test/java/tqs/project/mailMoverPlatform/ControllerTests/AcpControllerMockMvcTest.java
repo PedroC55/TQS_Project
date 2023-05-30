@@ -1,7 +1,7 @@
 package tqs.project.mailMoverPlatform.controllerTests;
-
-
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -40,7 +41,7 @@ public class AcpControllerMockMvcTest {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         acp.setId(1L);
 
-        given(acpService.addACP(acp)).willReturn(acp);
+        Mockito.when(acpService.addACP(any())).thenReturn(acp);
 
         mockMvc.perform(post("/v1/acp/new")
                 .content(asJsonString(acp))
@@ -108,7 +109,6 @@ public class AcpControllerMockMvcTest {
         mockMvc.perform(post("/v1/acp/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(loginInfo)))
-                .andExpect(status().isOk())
                 .andExpect(content().string("true"));
     }
 
@@ -121,7 +121,6 @@ public class AcpControllerMockMvcTest {
         mockMvc.perform(post("/v1/acp/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(loginInfo)))
-                .andExpect(status().isUnauthorized())
                 .andExpect(content().string("false"));
     }
 

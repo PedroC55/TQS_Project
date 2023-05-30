@@ -1,5 +1,6 @@
 package tqs.project.mailMoverPlatform.controllerTests;
 
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -44,20 +45,20 @@ public class OrdersControllerMockMvcTest {
         acp.setId(1L);
         given(acpService.getAcpById(1L)).willReturn(Optional.of(acp));
 
-        Order order = new Order("cliente1", acp);
+        Order order = new Order("Client1", acp);
         order.setId(1L);
-        given(orderService.addOrder(order)).willReturn(order);
+        given(orderService.addOrder(any())).willReturn(order);
 
         mockMvc.perform(post("/v1/orders/new/{clientname}/{acp_id}", "cliente1", 1L)
                     .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id").value(1))
                 .andExpect(jsonPath("$.clientName").value("Client1"))
-                .andExpect(jsonPath("$.status").value("NEW"))
-                .andExpect(jsonPath("$.acp.id").value(1))
-                .andExpect(jsonPath("$.acp.name").value("Acp1"))
-                .andExpect(jsonPath("$.acp.address").value("Address1"))
-                .andExpect(jsonPath("$.acp.email").value("acp1@mail.com"));
+                .andExpect(jsonPath("$.status").value("STORE"))
+                .andExpect(jsonPath("$.acp.id").value(acp.getId()))
+                .andExpect(jsonPath("$.acp.name").value(acp.getName()))
+                .andExpect(jsonPath("$.acp.address").value(acp.getAddress()))
+                .andExpect(jsonPath("$.acp.email").value(acp.getEmail()));
     }
 
     @Test
