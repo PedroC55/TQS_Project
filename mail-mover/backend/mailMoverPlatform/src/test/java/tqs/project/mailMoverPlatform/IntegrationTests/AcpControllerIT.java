@@ -1,5 +1,7 @@
 package tqs.project.mailMoverPlatform.integrationTests;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,10 +10,14 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.HashMap;
+import static org.hamcrest.CoreMatchers.is;
 import java.util.List;
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.LoginInfo;
+import tqs.project.mailMoverPlatform.repositories.AcpRepository;
+import tqs.project.mailMoverPlatform.repositories.OrderRepository;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class AcpControllerIT {
@@ -21,6 +27,16 @@ public class AcpControllerIT {
     @LocalServerPort
     private int port;
 
+    @Autowired
+    AcpRepository repository;
+    @Autowired
+    OrderRepository order_repository;
+    
+    @BeforeEach
+    void setUp(){
+        order_repository.deleteAll();
+        repository.deleteAll();
+    }
 
     @Test
     public void testCreateACP() {
@@ -38,33 +54,45 @@ public class AcpControllerIT {
 
     @Test
     public void testGetAllAcps() {
+        ACP acp1 = new ACP("Loja ACP 1","Rua dos correios","lojaAcp1@mail.com","pw_acp1");
+        ACP acp2 = new ACP("Loja ACP2 ","Rua da avenida","lojaAcp2@mail.com","pw_acp2");
+        repository.save(acp1);
+        repository.save(acp2);
+
         ResponseEntity<List> response = restTemplate.getForEntity(getBaseUrl() + "/v1/acp/all", List.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
         List<HashMap<String, String>> acps = response.getBody();
         assertThat(acps).isNotEmpty();
+        assertThat(acps.size(), is(2));
+        
     }
 
 
     @Test
     public void testGetAcpById() {
-        Long acpId = 1L;
+        ACP acp1 = new ACP("Loja ACP 1","Rua dos correios","lojaAcp1@mail.com","pw_acp1");
+        repository.save(acp1);
+        Long acpId = acp1.getId();
+        
         ResponseEntity<HashMap> response = restTemplate.getForEntity(getBaseUrl() + "/v1/acp/{id}", HashMap.class, acpId);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        HashMap<String, String> acp = response.getBody();
-        assertThat(acp).isNotNull();
-        assertThat(acp.get("id").equals(acpId.toString()));
-
+        HashMap<String, String> response_acp = response.getBody();
+        assertThat(response_acp).isNotNull();
+        assertThat(response_acp.get("id"),is(acpId.toString()));
     }
 
     @Test
     public void testLogin() {
-        LoginInfo loginInfo = new LoginInfo("lojaAcp@mail.com","pw_acp");
+        ACP acp1 = new ACP("Loja ACP 1","Rua dos correios","lojaAcp1@mail.com","pw_acp1");
+        Long acpId = 1L;
+        acp1.setId(acpId);
+        repository.save(acp1);
 
-        ResponseEntity<HashMap> response = restTemplate.postForEntity(getBaseUrl() + "/v1/acp/login", loginInfo, HashMap.class);
+        LoginInfo loginInfo = new LoginInfo("lojaAcp1@mail.com","pw_acp1");
+
+        ResponseEntity<Boolean> response = restTemplate.postForEntity(getBaseUrl() + "/v1/acp/login", loginInfo, Boolean.class);
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
-        HashMap<String, Object> responseBody = response.getBody();
-        assertThat(responseBody).isNotNull();
-        Boolean auth = (Boolean) responseBody.get("auth");
+        Boolean auth = response.getBody();
         assertThat(auth).isNotNull();
         assertThat(auth).isTrue();
     }

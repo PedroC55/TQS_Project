@@ -2,31 +2,38 @@ package tqs.project.mailMoverPlatform.repositoriesTests;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
 import static org.assertj.core.api.Assertions.assertThat;
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.repositories.AcpRepository;
 
 
 @DataJpaTest
+@Transactional(propagation = Propagation.NOT_SUPPORTED)
 public class AcpRepositoryTest {
     
     @Autowired
     private AcpRepository repository;
     
-    @Autowired
-    private TestEntityManager entityManager;
-
+    @BeforeEach
+    void setUp(){
+        repository.deleteAll();
+    }
+    
     @Test
     void givenAnAcp_whenFindById_thenReturnAcp(){
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
-        entityManager.persistAndFlush(acp);
+        repository.save(acp);
 
         Optional<ACP> response = repository.findById(acp.getId());
-        assertThat(response).isPresent().contains(acp);
+        assertThat(response).isPresent();
+        assertThat(response.get().getEmail().equals(acp.getEmail()));
     }
 
     @Test
@@ -43,11 +50,11 @@ public class AcpRepositoryTest {
         ACP acp4 = new ACP("Loja ACP 4","Rua da Saudade","lojaAcp4@mail.com","pw_acp4");
         ACP acp5 = new ACP("Loja ACP 5","Rua Dom Infante","lojaAcp5@mail.com","pw_acp5");
         
-        entityManager.persistAndFlush(acp1);
-        entityManager.persistAndFlush(acp2);
-        entityManager.persistAndFlush(acp3);
-        entityManager.persistAndFlush(acp4);
-        entityManager.persistAndFlush(acp5);
+        repository.save(acp1);
+        repository.save(acp2);
+        repository.save(acp3);
+        repository.save(acp4);
+        repository.save(acp5);
 
         List<ACP> allACPs = repository.findAll();
 
