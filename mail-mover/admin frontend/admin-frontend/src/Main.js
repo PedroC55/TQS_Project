@@ -70,8 +70,8 @@ export default function Main () {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response1 = await axios.get('http://192.168.1.71:8080/v1/acp/all');
-        const response2 = await axios.get('http://192.168.1.71:8080/v1/orders/all');
+        const response1 = await axios.get('http://localhost:8080/v1/acp/all');
+        const response2 = await axios.get('http://localhost:8080/v1/orders/all');
         setOrder_data(response2.data);
         setAcp_Data(response1.data);
         /*console.log(response.data);*/
@@ -103,7 +103,7 @@ export default function Main () {
 
   const handleAddAcp = async () => {
     try {
-      const response = await axios.post('http://192.168.1.71:8080/v1/acp/new', {
+      const response = await axios.post('http://localhost:8080/v1/acp/new', {
         address: addressInput,
         email: emailInput,
         name: acpNameInput,
@@ -139,7 +139,7 @@ export default function Main () {
     try {
       const acpId = document.getElementById('acpId').value; // Get the ACP ID from the TextField
 
-      const response = await axios.get(`http://192.168.1.71:8080/v1/orders/byAcp/${acpId}`);
+      const response = await axios.get(`http://localhost:8080/v1/orders/byAcp/${acpId}`);
       console.log(response.data);
       const filteredOrders = response.data; // Assuming the response data is an array of orders
       setOrders(filteredOrders); // Update the orders array with the filtered data
@@ -152,7 +152,7 @@ export default function Main () {
     try {
       const orderId = document.getElementById('orderId').value; // Get the ACP ID from the TextField
 
-      const response = await axios.get(`http://192.168.1.71:8080/v1/orders/byId/${orderId}`);
+      const response = await axios.get(`http://localhost:8080/v1/orders/byId/${orderId}`);
       const order = response.data; // Assuming the response data is an array of orders
       console.log(response.data);
       if (order && order.id) {
@@ -167,7 +167,7 @@ export default function Main () {
 
   const handleFilterReset = async () => {
     try {
-      const response = await axios.get(`http://192.168.1.71:8080/v1/orders/all`);
+      const response = await axios.get(`http://localhost:8080/v1/orders/all`);
       console.log(response.data);
       setOrders(response.data); 
     } catch (error) {
@@ -276,7 +276,6 @@ export default function Main () {
                   <StyledTableCell align="right">ACP</StyledTableCell>
                   <StyledTableCell align="right">Address</StyledTableCell>
                   <StyledTableCell align="right">Email</StyledTableCell>
-                  <StyledTableCell align="right">Actions</StyledTableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -286,14 +285,14 @@ export default function Main () {
                     <StyledTableCell align="right">{row.name}</StyledTableCell>
                     <StyledTableCell align="right">{row.address}</StyledTableCell>
                     <StyledTableCell align="right">{row.email}</StyledTableCell>
-                    <StyledTableCell align="right">
+                    {/*<StyledTableCell align="right">
                       <Button
                         sx={{ backgroundColor: '#8B0000' }}
                         variant="contained"
                       >
                         Remove ACP
                       </Button>
-                    </StyledTableCell>
+                    </StyledTableCell>*/}
                   </StyledTableRow>
                 ))}
               </TableBody>

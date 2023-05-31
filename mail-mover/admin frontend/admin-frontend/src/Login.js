@@ -16,7 +16,7 @@ export default function Login() {
   
       try {
         // Send login request to the API
-        const response = await axios.post('http://192.168.1.71:8080/v1/admin/login', {
+        const response = await axios.post('http://localhost:8080/v1/admin/login', {
           email: username,
           password: password
         });
