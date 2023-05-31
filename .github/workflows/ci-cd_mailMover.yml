@@ -2,6 +2,8 @@ name: CI/CD Pipeline
 
 on:
   push:
+    paths:
+      - mail-mover/**
     branches:
       - main
   pull_request:
