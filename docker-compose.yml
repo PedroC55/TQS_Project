@@ -1,0 +1,44 @@
+version: '3'
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: user
+      MYSQL_DATABASE: mailMoverDB
+    expose:
+      - 3306
+  # acp_frontend:
+  #   build:
+  #     context: ./mail-mover/acp frontend/acp-frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3001:3001
+  # admin_frontend:
+  #   build:
+  #     context: ./mail-mover/admin frontend/admin-frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  # store_frontend:
+  #   build:
+  #     context: ./store/frontend/store-frontend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3002:3002
+  mail_mover_backend:
+    build:
+      context: ./mail-mover/backend/mailMoverPlatform
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - mysql
+  # store_backend:
+  #   build:
+  #     context: ./store/backend/storebackend
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 8081:8081
+  #   depends_on:
+  #     - mysql
+ 

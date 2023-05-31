@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 
 @SpringBootApplication
-@EntityScan(basePackages = {"tqs.project.mailMoverPlatform.entities"})
+//@EntityScan(basePackages = {"tqs.project.mailMoverPlatform.entities"})
 public class MailMoverPlatformApplication {
 
 	public static void main(String[] args) {
