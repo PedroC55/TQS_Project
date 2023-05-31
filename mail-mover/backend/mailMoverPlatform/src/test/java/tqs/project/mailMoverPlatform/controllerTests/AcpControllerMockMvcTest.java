@@ -23,10 +23,10 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import tqs.project.mailMoverPlatform.Controller.AcpController;
-import tqs.project.mailMoverPlatform.Entities.ACP;
-import tqs.project.mailMoverPlatform.Entities.LoginInfo;
-import tqs.project.mailMoverPlatform.Services.AcpServiceImpl;
+import tqs.project.mailMoverPlatform.controller.AcpController;
+import tqs.project.mailMoverPlatform.entities.ACP;
+import tqs.project.mailMoverPlatform.entities.LoginInfo;
+import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
 
 
 @WebMvcTest(AcpController.class)
