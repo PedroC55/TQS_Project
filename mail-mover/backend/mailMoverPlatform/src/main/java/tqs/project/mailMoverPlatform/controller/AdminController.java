@@ -20,12 +20,12 @@ public class AdminController {
     private AdminServiceImpl service;
 
     @PostMapping("/new")
-    public ResponseEntity<Admin> createACP(@RequestBody Admin newAdmin) {
+    public ResponseEntity<Admin> createAdmin(@RequestBody Admin newAdmin) {
         Admin ret_admin = service.addAdmin(newAdmin);
         if (ret_admin == null) {
             return new ResponseEntity<Admin>(ret_admin, HttpStatus.BAD_REQUEST);
         } else {
-            return new ResponseEntity<>(ret_admin, HttpStatus.CREATED);
+            return new ResponseEntity<Admin>(ret_admin, HttpStatus.CREATED);
         }
     }
     
@@ -34,4 +34,5 @@ public class AdminController {
         boolean auth = service.performLogin(loginInfo.getEmail(), loginInfo.getPassword());
         return auth;
     }
+
 }
