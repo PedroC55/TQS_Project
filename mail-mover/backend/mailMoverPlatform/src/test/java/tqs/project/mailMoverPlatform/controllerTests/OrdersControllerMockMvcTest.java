@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.controllerTests;
+package tqs.project.mailMoverPlatform.ControllerTests;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
@@ -21,11 +21,11 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 
-import tqs.project.mailMoverPlatform.controller.OrdersController;
-import tqs.project.mailMoverPlatform.entities.ACP;
-import tqs.project.mailMoverPlatform.entities.Order;
-import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
-import tqs.project.mailMoverPlatform.services.OrderServiceImpl;
+import tqs.project.mailMoverPlatform.Controller.OrdersController;
+import tqs.project.mailMoverPlatform.Entities.ACP;
+import tqs.project.mailMoverPlatform.Entities.Order;
+import tqs.project.mailMoverPlatform.Services.AcpServiceImpl;
+import tqs.project.mailMoverPlatform.Services.OrderServiceImpl;
 
 @WebMvcTest(OrdersController.class)
 public class OrdersControllerMockMvcTest {

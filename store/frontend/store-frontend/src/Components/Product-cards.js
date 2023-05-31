@@ -20,12 +20,12 @@ export function Products(props){
                         <img src={props.image} alt='product-img' className='productImage'></img>
 
 
-                        <FaShoppingCart className={"productCard__cart"} />
+                        
                         <FaRegBookmark className={"productCard__wishlist"} />
                         <FaFireAlt className={"productCard__fastSelling"} />
 
                         <div className='productCard__content'>
-                            <Link to={`/ProductPage/${props.name}`} state={{data: data}}>{props.name}</Link>
+                            <Link name="productToBuy" to={`/ProductPage/${props.name}`} state={{data: data}}>{props.name}</Link>
                             <div className='displayStack__1'>
                                 <div className='productPrice'>{props.price}€</div>
                                 <div className='productSales'>{props.totalSales} units sold</div>

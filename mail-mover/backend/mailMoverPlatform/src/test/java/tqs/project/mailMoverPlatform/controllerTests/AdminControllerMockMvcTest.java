@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.controllerTests;
+package tqs.project.mailMoverPlatform.ControllerTests;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
