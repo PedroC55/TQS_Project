@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.Entities;
+package tqs.project.mailMoverPlatform.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

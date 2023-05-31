@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.Controller;
+package tqs.project.mailMoverPlatform.controller;
 
 import java.util.ArrayList;
 import java.util.HashMap;
