@@ -22,7 +22,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Go to repository
-        run: cd ./mail-mover/backend/mailMoverPlatform
+        run: cd mail-mover/backend/mailMoverPlatform
       - name: Build with Maven
         run: mvn clean package
 
