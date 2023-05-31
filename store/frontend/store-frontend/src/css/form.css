@@ -1,0 +1,101 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+
+  }
+
+
+  .big-box{
+    display: flex;
+  }
+
+  .select-box{
+    flex: 1;
+  }
+
+  .label-box{
+    flex: 1;
+  }
+
+  .card-box{
+    width: 25%;
+    height: 100vh;
+    
+    flex: 0.25;
+  
+    margin: 0vw;
+  
+    position: relative;
+  }
+
+
+
+  .form-box {
+    width: 75%;
+    height: 100vh;
+    border: 1px solid rgb(255, 128, 0);
+    flex: 0.75;
+  
+    margin: 0vw;
+    padding: 5vw;
+    position: relative;
+    
+  }
+  .form-box h3 {
+    font-size: 35px;
+    text-align: center;
+    color: #f55a00;
+    margin: 0 0 0.5vh 0;
+  }
+  .form-box label {
+    display: block;
+    text-align: center;
+    font-size: 20px;
+    margin: 0 0 2vh 0;
+  }
+
+  .form-box input,
+textarea {
+  display: block;
+  width: 100%;
+  padding: 0.5rem 0.8rem 0.5rem 0.8rem;
+  margin: 0.9vw 0;
+  border: 0;
+  border-radius: 5px;
+  font-size: 20px;
+}
+
+.form-box textarea {
+  height: 15vh;
+}
+
+.submitBtn {
+    display: inline-block;
+    width: 30%;
+    height: 2rem;
+    color: red;
+    border: 0;
+    bottom: 0;
+    cursor: pointer;
+    font-size: 20px;
+    position:absolute;
+  }
+
+  .submitBtn {
+    margin: 1rem 0 1rem 8rem;
+    margin-left: 30%;
+    margin-bottom: 15%;
+    border-radius: 0 20px 20px 0;
+  }
+  
+  .submitBtn:hover {
+    background-color: rgb(245, 245, 78);
+    transition: 1s background ease;
+  }
+
+.custom-select{
+  width: 500px;
+  height: 40px;
+  font-size: 20px;
+}

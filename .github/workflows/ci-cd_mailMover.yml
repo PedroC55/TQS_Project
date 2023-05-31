@@ -2,6 +2,8 @@ name: CI/CD Pipeline
 
 on:
   push:
+    paths:
+      - mail-mover/**
     branches:
       - main
   pull_request:
@@ -21,9 +23,13 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-
+      
       - name: Build with Maven
-        run: mvn clean package
+        run: |
+          cd mail-mover/backend/mailMoverPlatform
+          mvn clean package
 
       - name: Run tests
-        run: mvn test
+        run: |
+          cd mail-mover/backend/mailMoverPlatform
+          mvn test

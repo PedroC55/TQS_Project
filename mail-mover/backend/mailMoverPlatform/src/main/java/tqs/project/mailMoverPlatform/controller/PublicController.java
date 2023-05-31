@@ -26,6 +26,7 @@ public class PublicController {
     @Autowired
     private AcpServiceImpl acp_service;
 
+    @CrossOrigin(origins="*")
     @PostMapping("/new/{clientName}/{acp_id}")
     public HashMap<String,Object> createOrder(@PathVariable String clientName, @PathVariable Long acp_id) {
         Optional<ACP> ret_acp = acp_service.getAcpById(acp_id);
@@ -54,6 +55,7 @@ public class PublicController {
         } 
     }
 
+    @CrossOrigin(origins="*")
     @GetMapping("/byAcp/{acp_id}")
     public ArrayList<HashMap<String,Object>> getByAcpId(@PathVariable Long acp_id) {
         Optional<ACP> ret_acp = acp_service.getAcpById(acp_id);
@@ -111,7 +113,7 @@ public class PublicController {
     public boolean changeState_STORE_to_COURIER(@PathVariable Long id,@PathVariable Long ts) {
         return service.changeState_STORE_to_COURIER(id, ts);
     }
-
+    @CrossOrigin(origins="*")
     @GetMapping("/all")
     public ArrayList<HashMap<String,String>> getAllAcps() {
         List<ACP> allAcps = acp_service.getAllAcps();

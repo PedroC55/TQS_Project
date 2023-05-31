@@ -31,8 +31,10 @@ export const ShopContextProvider = (props) => {
 
     setCartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }));
     console.log(cartItems);
+    sessionStorage.setItem('cartItems', JSON.stringify(cartItems));
     
   };
+  
 
   const getCart = () => {
     return cartItems;
