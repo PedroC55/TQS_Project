@@ -28,4 +28,6 @@ jobs:
           mvn clean package
 
       - name: Run tests
-        run: mvn test
+        run: |
+          cd mail-mover/backend/mailMoverPlatform
+          mvn test
