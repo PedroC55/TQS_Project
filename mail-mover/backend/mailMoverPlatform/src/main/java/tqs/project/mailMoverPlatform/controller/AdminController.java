@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.controller;
+package tqs.project.mailMoverPlatform.Controller;
 
 import java.util.List;
 
@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import tqs.project.mailMoverPlatform.entities.Admin;
-import tqs.project.mailMoverPlatform.entities.LoginInfo;
-import tqs.project.mailMoverPlatform.services.AdminServiceImpl;
+import tqs.project.mailMoverPlatform.Entities.Admin;
+import tqs.project.mailMoverPlatform.Entities.LoginInfo;
+import tqs.project.mailMoverPlatform.Services.AdminServiceImpl;
 
 @RestController
 @RequestMapping("v1/admin")

@@ -1,4 +1,4 @@
-package tqs.project.mailMoverPlatform.controllerTests;
+package tqs.project.mailMoverPlatform.ControllerTests;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.BDDMockito.given;
@@ -18,10 +18,10 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import tqs.project.mailMoverPlatform.controller.AdminController;
-import tqs.project.mailMoverPlatform.entities.Admin;
-import tqs.project.mailMoverPlatform.entities.LoginInfo;
-import tqs.project.mailMoverPlatform.services.AdminServiceImpl;
+import tqs.project.mailMoverPlatform.Controller.AdminController;
+import tqs.project.mailMoverPlatform.Entities.Admin;
+import tqs.project.mailMoverPlatform.Entities.LoginInfo;
+import tqs.project.mailMoverPlatform.Services.AdminServiceImpl;
 
 
 
