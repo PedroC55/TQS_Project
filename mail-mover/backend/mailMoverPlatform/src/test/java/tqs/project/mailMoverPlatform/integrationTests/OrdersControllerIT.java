@@ -1,5 +1,6 @@
 package tqs.project.mailMoverPlatform.integrationTests;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -8,12 +9,14 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import static org.assertj.core.api.Assertions.assertThat;
-
+import static org.hamcrest.MatcherAssert.assertThat;
 import java.util.ArrayList;
 import java.util.HashMap;
-
+import static org.hamcrest.CoreMatchers.is;
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
+import tqs.project.mailMoverPlatform.repositories.AcpRepository;
+import tqs.project.mailMoverPlatform.repositories.OrderRepository;
 import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
 import tqs.project.mailMoverPlatform.services.OrderServiceImpl;
 
@@ -30,7 +33,18 @@ public class OrdersControllerIT {
 
     @Autowired
     private AcpServiceImpl acpService;
+    
+    @Autowired
+    OrderRepository order_repository;
 
+    @Autowired
+    AcpRepository acp_repository;
+
+    @BeforeEach
+    void setUp(){
+        order_repository.deleteAll();
+        acp_repository.deleteAll();
+    }
     @Test
     public void testCreateOrder() {
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
@@ -62,6 +76,15 @@ public class OrdersControllerIT {
 
     @Test
     public void testGetAllOrders() {
+        ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
+        acp = acpService.addACP(acp);
+
+        Order order1 = new Order("Client1", acp);
+        Order order2 = new Order("Client2", acp);
+
+        order_repository.save(order1);
+        order_repository.save(order2);
+        
         ResponseEntity<Object> response = restTemplate.getForEntity(getBaseUrl() + "/v1/orders/all", Object.class);
 
         assertThat(response.getStatusCode()).isEqualTo(HttpStatus.OK);
@@ -69,12 +92,16 @@ public class OrdersControllerIT {
 
         ArrayList<HashMap<String, Object>> responseBody = (ArrayList<HashMap<String, Object>>) response.getBody();
         assertThat(responseBody).isNotNull();
+        assertThat(responseBody.size(), is(2));
+        assertThat(responseBody.get(0).get("clientName"), is("Client1"));
     }
 
     @Test
     public void testGetOrdersByAcpId() {
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
         acp = acpService.addACP(acp);
+        Order order = new Order("Client1", acp);
+        order_repository.save(order);
 
         ResponseEntity<Object> response = restTemplate.getForEntity(getBaseUrl() + "/v1/orders/byAcp/{acp_id}",
                 Object.class, acp.getId());
@@ -83,7 +110,9 @@ public class OrdersControllerIT {
         assertThat(response.getBody()).isInstanceOf(ArrayList.class);
 
         ArrayList<HashMap<String, Object>> responseBody = (ArrayList<HashMap<String, Object>>) response.getBody();
+        
         assertThat(responseBody).isNotNull();
+        assertThat(responseBody.get(0).get("clientName"), is("Client1"));
     }
 
     @Test
@@ -107,6 +136,7 @@ public class OrdersControllerIT {
         assertThat(responseBody.containsKey("acpDeliveryDate")).isTrue();
         assertThat(responseBody.containsKey("clientPickUpDate")).isTrue();
         assertThat(responseBody.containsKey("acp")).isTrue();
+        assertThat(responseBody.get("clientName"), is("Client1"));
     }
 
     private String getBaseUrl() {

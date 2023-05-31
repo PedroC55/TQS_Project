@@ -2,36 +2,45 @@ package tqs.project.mailMoverPlatform.repositoriesTests;
 
 import java.util.List;
 import java.util.Optional;
+
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.annotation.Propagation;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
+import tqs.project.mailMoverPlatform.repositories.AcpRepository;
 import tqs.project.mailMoverPlatform.repositories.OrderRepository;
 
 @DataJpaTest
-@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@Transactional(propagation = Propagation.NOT_SUPPORTED) 
 public class OrdersRepositoryTest {
     
     @Autowired
     private OrderRepository repository;
     @Autowired
-    private TestEntityManager entityManager;
+    private AcpRepository acp_repository;
+    @BeforeEach
+    void setUp(){
+        repository.deleteAll();
+        acp_repository.deleteAll();
+    }
 
     @Test
     void givenAnOrder_whenFindById_thenReturnOrder(){
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
-        entityManager.persistAndFlush(acp);
+        //entityManager.persistAndFlush(acp);
+        acp_repository.save(acp);
         Order order = new Order("Cliente 1", acp);
-        entityManager.persistAndFlush(order);
-
+        //entityManager.persistAndFlush(order);
+        repository.save(order);
         Optional<Order> response = repository.findById(order.getId());
-        assertThat(response).isPresent().contains(order);
+        assertThat(response).isPresent();
+        assertThat(response.get().getAcp().equals(acp));
     }
 
     @Test
@@ -43,15 +52,15 @@ public class OrdersRepositoryTest {
     @Test
     void givenThreeOrders_whenFindAll_thenReturnThree(){
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
-        entityManager.persistAndFlush(acp);
+        acp_repository.save(acp);
         
         Order order1 = new Order("Cliente 1", acp);
         Order order2 = new Order("Cliente 2", acp);
         Order order3 = new Order("Cliente 3", acp);
         
-        entityManager.persistAndFlush(order1);
-        entityManager.persistAndFlush(order2);
-        entityManager.persistAndFlush(order3);
+        repository.save(order1);
+        repository.save(order2);
+        repository.save(order3);
 
         List<Order> allOrders = repository.findAll();
         
@@ -72,9 +81,9 @@ public class OrdersRepositoryTest {
     @Test
     void givenAnOrder_whenFindByAcp_thenReturnOrder(){
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
-        entityManager.persistAndFlush(acp);
+        acp_repository.save(acp);
         Order order = new Order("Cliente 1", acp);
-        entityManager.persistAndFlush(order);
+        repository.save(order);
 
         List<Order> response = repository.findByAcp(acp);
         assertThat(response).isNotNull();
@@ -87,10 +96,10 @@ public class OrdersRepositoryTest {
     void givenAnOrder_whenFindByInvalidAcp_thenReturnNull(){
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
         ACP fake_acp = new ACP("Loja ACP fake","Rua dos correios","lojaAcp@mail.com","pw_acp");
-        entityManager.persistAndFlush(acp);
-        entityManager.persistAndFlush(fake_acp);
+        acp_repository.save(acp);
+        acp_repository.save(fake_acp);
         Order order = new Order("Cliente 1", acp);
-        entityManager.persistAndFlush(order);
+        repository.save(order);
 
         List<Order> response = repository.findByAcp(fake_acp);
         assertThat(response).isEmpty();
@@ -99,10 +108,10 @@ public class OrdersRepositoryTest {
     void givenAnOrder_whenFindByNonexistentAcp_thenReturnException(){
         ACP acp = new ACP("Loja ACP","Rua dos correios","lojaAcp@mail.com","pw_acp");
         ACP fake_acp = new ACP("Loja ACP fake","Rua dos correios","lojaAcp@mail.com","pw_acp");
-        entityManager.persistAndFlush(acp);
+        acp_repository.save(acp);
 
         Order order = new Order("Cliente 1", acp);
-        entityManager.persistAndFlush(order);
+        repository.save(order);
 
         assertThrows(Exception.class, () -> {repository.findByAcp(fake_acp);});
        

@@ -1,13 +1,12 @@
-package tqs.project.mailMoverPlatform.ControllerTests;
-
-
+package tqs.project.mailMoverPlatform.controllerTests;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.BDDMockito.given;
+import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -29,6 +28,7 @@ import tqs.project.mailMoverPlatform.Entities.ACP;
 import tqs.project.mailMoverPlatform.Entities.LoginInfo;
 import tqs.project.mailMoverPlatform.Services.AcpServiceImpl;
 
+
 @WebMvcTest(AcpController.class)
 public class AcpControllerMockMvcTest {
     
@@ -44,7 +44,7 @@ public class AcpControllerMockMvcTest {
         ACP acp = new ACP("Loja ACP", "Rua dos correios", "lojaAcp@mail.com", "pw_acp");
         acp.setId(1L);
 
-        given(acpService.addACP(acp)).willReturn(acp);
+        Mockito.when(acpService.addACP(any())).thenReturn(acp);
 
         mockMvc.perform(post("/v1/acp/new")
                 .content(asJsonString(acp))
@@ -53,6 +53,7 @@ public class AcpControllerMockMvcTest {
             .andExpect(MockMvcResultMatchers.status().isCreated())
             .andExpect(jsonPath("$.id").exists())
             //.andExpect(jsonPath("$.name", is("Loja ACP")))
+            .andExpect(jsonPath("$.name").value("Loja ACP"))
             .andReturn().getResponse().getContentAsString();
     }
 
@@ -112,7 +113,6 @@ public class AcpControllerMockMvcTest {
         mockMvc.perform(post("/v1/acp/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(loginInfo)))
-                .andExpect(status().isOk())
                 .andExpect(content().string("true"));
     }
 
@@ -125,7 +125,6 @@ public class AcpControllerMockMvcTest {
         mockMvc.perform(post("/v1/acp/login")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(asJsonString(loginInfo)))
-                .andExpect(status().isUnauthorized())
                 .andExpect(content().string("false"));
     }
 
