@@ -31,5 +31,5 @@ jobs:
 
       - name: Run tests
         run: |
-          cd store/backend/storeBackend
+          cd store/backend/storebackend
           mvn test
