@@ -16,5 +16,5 @@
 - Sonarcloud dashboard: https://sonarcloud.io/summary/overall?id=PedroC55_TQS_Project
 
 ## Login para a store:
-  -Utilizador: user;
-  -Password: user
+  - Utilizador: user
+  - Password: user
