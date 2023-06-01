@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
 import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
@@ -64,7 +65,7 @@ public class PublicController {
             List<Order> allOrders = service.getByAcp(acp);
             ArrayList<HashMap<String,Object>> ret_list = new ArrayList<>();
             for (Order order : allOrders){
-                HashMap<String,Object> ret = create_hash_order(order);
+                HashMap<String,Object> ret = create_hash_order_public(order);
                 ret_list.add(ret);
             }
             return ret_list;
@@ -79,7 +80,7 @@ public class PublicController {
         Order order = service.getById(id);
         HashMap<String,Object> ret = new HashMap<>();
         if (order != null) {
-            ret = create_hash_order(order);
+            ret = create_hash_order_public(order);
         } else {
             ret.put("error", "doesn't exist");
         }
@@ -108,7 +109,7 @@ public class PublicController {
         return ret_list;
     }
 
-    public HashMap<String,Object> create_hash_order(Order order){
+    public HashMap<String,Object> create_hash_order_public(Order order){
         HashMap<String,Object> ret = new HashMap<>();
         ret.put("id",order.getId());
         ret.put("clientName",order.getclientName());
