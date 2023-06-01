@@ -1,0 +1,16 @@
+tqs/project/mailMoverPlatform/entities/Order.class
+tqs/project/mailMoverPlatform/controller/PublicController.class
+tqs/project/mailMoverPlatform/entities/ACP.class
+tqs/project/mailMoverPlatform/services/AdminService.class
+tqs/project/mailMoverPlatform/services/AcpServiceImpl.class
+tqs/project/mailMoverPlatform/services/OrderServiceImpl.class
+tqs/project/mailMoverPlatform/repositories/AcpRepository.class
+tqs/project/mailMoverPlatform/services/AdminServiceImpl.class
+tqs/project/mailMoverPlatform/controller/AdminController.class
+tqs/project/mailMoverPlatform/repositories/AdminRepository.class
+tqs/project/mailMoverPlatform/controller/OrdersController.class
+tqs/project/mailMoverPlatform/services/OrderService.class
+tqs/project/mailMoverPlatform/MailMoverPlatformApplication.class
+tqs/project/mailMoverPlatform/services/AcpService.class
+tqs/project/mailMoverPlatform/repositories/OrderRepository.class
+tqs/project/mailMoverPlatform/entities/Admin.class
