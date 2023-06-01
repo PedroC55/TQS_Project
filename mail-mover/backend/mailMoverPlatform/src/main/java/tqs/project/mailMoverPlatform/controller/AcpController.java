@@ -14,11 +14,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.LoginInfo;
-import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
 
 @CrossOrigin(origins="*")
 @RestController
