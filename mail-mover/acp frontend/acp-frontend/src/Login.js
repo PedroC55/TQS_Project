@@ -3,12 +3,30 @@ import { Link } from "react-router-dom";
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { useEffect } from 'react';
 
 export default function Login() {
-     const navigate = useNavigate();
+    const navigate = useNavigate();
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-  
+    const [acps, setAcps] = useState([]);
+
+
+     useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response1 = await axios.get('http://localhost:8080/v1/acp/all');
+            
+            /*console.log(response.data);*/
+            setAcps(response1.data);
+          } catch (error) {
+            console.error(error);
+          }
+        };
+
+        fetchData();
+      }, []);
+
     const handleSubmit = async (e) => {
       e.preventDefault();
   
@@ -21,8 +39,14 @@ export default function Login() {
         console.log(response.data);
         // Check the response status
         if (response.data === true) {
+          const acp = acps.find(acp => acp.email === username);
+          if(acp) {
+            const id = acp.id;
+            console.log(id)
+            navigate(`/Main/${id}`);
+          }
           // Authentication successful, navigate to the main page
-          navigate('/Main');
+          console.log("AUthetication failed")
         } else {
           // Authentication failed, handle the error or show an error message
           console.log('Authentication failed');

@@ -10,6 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Box, Button, Modal, TextField, Typography , Menu,  MenuItem, Select, Tabs, Tab} from '@mui/material';
 
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
 
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -54,52 +57,74 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 
 export default function Main() {
 
-    const [rows, setRows] = useState([
-        {trackingNumber: '123', user: 'User 1', state: 'Na Loja' },
-        {trackingNumber: '132', user: 'User 2', state: 'Com estafeta' },
-        {trackingNumber: '456', user: 'User 3', state: 'Com estafeta' },
-        {trackingNumber: '445', user: 'User 4', state: 'No ponto' },
-        {trackingNumber: '743', user: 'User 5', state: 'Entregue' }
-      ]);
-      const handleStateChange = (newState, trackingNumber) => {
-        setRows((prevRows) => {
-          return prevRows.map((row) => {
-            if (row.trackingNumber === trackingNumber) {
-              return { ...row, state: newState };
-            }
-            return row;
-          });
-        });
-      };
+
+      const [acps, setAcps] = useState([]);
+      const [orders, setOrders] = useState([]);
+      const { id } = useParams();
+      console.log(id);
+
+
+      useEffect(() => {
+        const fetchData = async () => {
+          try {
+            const response1 = await axios.get(`http://localhost:8080/v1/orders/byAcp/${id}`); 
+            /*console.log(response.data);*/
+              setOrders(response1.data);
+            } catch (error) {
+            console.error(error);
+          }
+        };
+
+        fetchData();
+      }, []);
+
+
+
+      if(!acps) {
+        return (
+          <div>No data</div>
+    )
+  }
+
+
+
 
 
     return (
 
         <div className="main">
             <div className="table">
-            <TableContainer component={Paper}>
+              <TableContainer component={Paper}>
                     <Table sx={{ minWidth: 800}} aria-label="customized table">
                       <TableHead>
-                        <TableRow>
-                          <StyledTableCell align="right">Tracking Number</StyledTableCell>
-                          <StyledTableCell align="right">User</StyledTableCell>
-                          <StyledTableCell align="right">State</StyledTableCell>
-                          <StyledTableCell align="right">Change State</StyledTableCell>
+                        <TableRow>        
+                          <StyledTableCell align="right">Order Id</StyledTableCell>
+                          <StyledTableCell align="right">ACP Delivery Date</StyledTableCell>
+                          <StyledTableCell align="right">Client Name</StyledTableCell>
+                          <StyledTableCell align="right">Client Pick Up Date </StyledTableCell>
+                          <StyledTableCell align="right">ACP Id</StyledTableCell>
+                          <StyledTableCell align="right">Store Pick Up Date</StyledTableCell>
+                          <StyledTableCell align="right">Status</StyledTableCell>  
+                          <StyledTableCell align="right">Change Status</StyledTableCell> 
                         </TableRow>
                       </TableHead>
                       <TableBody>
-                        {rows.map((row) => (
-                          <StyledTableRow key={row.trackingNumber}>
-
-                            <StyledTableCell align="right">{row.trackingNumber}</StyledTableCell>
-                            <StyledTableCell align="right">{row.user}</StyledTableCell>
-                            <StyledTableCell align="right">{row.state}</StyledTableCell>
+                        {orders.map((row , index) => (
+                          <StyledTableRow key={row.id}>
+                            <StyledTableCell align="right">{row.id}</StyledTableCell>
+                            <StyledTableCell align="right">{row.acpDeliveryDate ?  new Date(row.acpDeliveryDate).toLocaleDateString('en-GB') : ''}</StyledTableCell>
+                            <StyledTableCell align="right">{row.clientName}</StyledTableCell>
+                            <StyledTableCell align="right">{row.clientPickUpDate ?  new Date(row.clientPickUpDate).toLocaleDateString('en-GB') : 'N/A' }</StyledTableCell>
+                            <StyledTableCell align="right">{row.acp.id}</StyledTableCell>
+                            <StyledTableCell align="right">{row.storePickUpDate ?  new Date(row.storePickUpDate).toLocaleDateString('en-GB') : 'N/A'}</StyledTableCell>
+                            <StyledTableCell align="right">{row.status}</StyledTableCell>
                             <StyledTableCell align="right">
                               <Select
-                                value={row.state}
-                                onChange={(event) => handleStateChange(event.target.value, row.trackingNumber)}
+                                value={row.status}
                               >
                                 <MenuItem value="Na Loja">Na Loja</MenuItem>
+                                <MenuItem value="Com estafeta">Com estafeta</MenuItem>
+                                <MenuItem value="No ponto">No ponto</MenuItem>
                                 <MenuItem value="Entregue">Entregue</MenuItem>
                               </Select>
                             </StyledTableCell>
