@@ -57,12 +57,12 @@ public class OrdersController {
     @GetMapping("/all")
     public ArrayList<HashMap<String,Object>> getAllOrders() {
         List<Order> allOrders = service.getAllOrders();
-        ArrayList<HashMap<String,Object>> ret_list = new ArrayList<>();
+        ArrayList<HashMap<String,Object>> ret_list_orders = new ArrayList<>();
         for (Order order : allOrders){
             HashMap<String,Object> ret = create_hash_order(order);
-            ret_list.add(ret);
+            ret_list_orders.add(ret);
         }
-        return ret_list;
+        return ret_list_orders;
     }
     
     @GetMapping("/byAcp/{acp_id}")

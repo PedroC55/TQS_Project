@@ -30,100 +30,100 @@ public class PublicController {
     @CrossOrigin(origins="*")
     @PostMapping("/new/{clientName}/{acp_id}")
     public HashMap<String,Object> createOrder(@PathVariable String clientName, @PathVariable Long acp_id) {
-        Optional<ACP> ret_acp = acp_service.getAcpById(acp_id);
-        if (ret_acp.isPresent()) {
-            ACP acp = ret_acp.get();
-            Order _order = new Order(clientName, acp);
-            Order order = service.addOrder(_order);
-            HashMap<String,Object> ret = new HashMap<>();
-            ret.put("id",order.getId());
-            ret.put("clientName",order.getclientName());
-            ret.put("status",order.getStatus());
-            ret.put("storePickUpDate",order.getStorePickUpDate());
-            ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
-            ret.put("clientPickUpDate",order.getClientPickUpDate());
-            HashMap<String,Object> retACP = new HashMap<>();
-            retACP.put("id",acp.getId());
-            retACP.put("name",acp.getName());
-            retACP.put("address",acp.getAddress());
-            retACP.put("email",acp.getEmail());
-            ret.put("acp",retACP);
-            return ret;
+        Optional<ACP> ret_acp_public = acp_service.getAcpById(acp_id);
+        if (ret_acp_public.isPresent()) {
+            ACP acp = ret_acp_public.get();
+            Order _order_public = new Order(clientName, acp);
+            Order order = service.addOrder(_order_public);
+            HashMap<String,Object> ret_public = new HashMap<>();
+            ret_public.put("id",order.getId());
+            ret_public.put("clientName",order.getclientName());
+            ret_public.put("status",order.getStatus());
+            ret_public.put("storePickUpDate",order.getStorePickUpDate());
+            ret_public.put("acpDeliveryDate",order.getAcpDeliveryDate());
+            ret_public.put("clientPickUpDate",order.getClientPickUpDate());
+            HashMap<String,Object> retACP_public = new HashMap<>();
+            retACP_public.put("id",acp.getId());
+            retACP_public.put("name",acp.getName());
+            retACP_public.put("address",acp.getAddress());
+            retACP_public.put("email",acp.getEmail());
+            ret_public.put("acp",retACP_public);
+            return ret_public;
         } else{
-            HashMap<String,Object> ret = new HashMap<>();
-            ret.put("error","acp doesn't exist");
-            return ret;
+            HashMap<String,Object> ret_public = new HashMap<>();
+            ret_public.put("error","acp doesn't exist");
+            return ret_public;
         } 
     }
 
     @CrossOrigin(origins="*")
     @GetMapping("/byAcp/{acp_id}")
     public ArrayList<HashMap<String,Object>> getByAcpId(@PathVariable Long acp_id) {
-        Optional<ACP> ret_acp = acp_service.getAcpById(acp_id);
-        if (ret_acp.isPresent()) {
-            ACP acp = ret_acp.get();
+        Optional<ACP> ret_acp_public = acp_service.getAcpById(acp_id);
+        if (ret_acp_public.isPresent()) {
+            ACP acp = ret_acp_public.get();
             List<Order> allOrders = service.getByAcp(acp);
-            ArrayList<HashMap<String,Object>> ret_list = new ArrayList<>();
+            ArrayList<HashMap<String,Object>> ret_list_public = new ArrayList<>();
             for (Order order : allOrders){
                 HashMap<String,Object> ret = create_hash_order_public(order);
-                ret_list.add(ret);
+                ret_list_public.add(ret);
             }
-            return ret_list;
+            return ret_list_public;
         } else{
-            ArrayList<HashMap<String,Object>> ret_list = new ArrayList<>();
-            return ret_list;
+            ArrayList<HashMap<String,Object>> ret_list_public = new ArrayList<>();
+            return ret_list_public;
         } 
     }
 
     @GetMapping("/byId/{id}")
     public HashMap<String,Object> getById(@PathVariable Long id) {
         Order order = service.getById(id);
-        HashMap<String,Object> ret = new HashMap<>();
+        HashMap<String,Object> ret_public = new HashMap<>();
         if (order != null) {
-            ret = create_hash_order_public(order);
+            ret_public = create_hash_order_public(order);
         } else {
-            ret.put("error", "doesn't exist");
+            ret_public.put("error", "doesn't exist");
         }
        
-        return ret;
+        return ret_public;
     }
     @GetMapping("/storeToCourier/{id}/{ts}")
-    public boolean changeState_STORE_to_COURIER(@PathVariable Long id,@PathVariable Long ts) {
+    public boolean changeState_STORE_to_COURIER_PUBLIC(@PathVariable Long id,@PathVariable Long ts) {
         return service.changeState_STORE_to_COURIER(id, ts);
     }
     @CrossOrigin(origins="*")
     @GetMapping("/all")
     public ArrayList<HashMap<String,String>> getAllAcps() {
-        List<ACP> allAcps = acp_service.getAllAcps();
-        ArrayList<HashMap<String,String>> ret_list = new ArrayList<>();
+        List<ACP> allAcps_public = acp_service.getAllAcps();
+        ArrayList<HashMap<String,String>> ret_list_public = new ArrayList<>();
 
-        for (ACP acp : allAcps){
+        for (ACP acp : allAcps_public){
             HashMap<String,String> acpInfo = new HashMap<>();
             acpInfo.put("id",acp.getId().toString());
             acpInfo.put("name",acp.getName());
             acpInfo.put("address",acp.getAddress());
             acpInfo.put("email",acp.getEmail());
-            ret_list.add(acpInfo);
+            ret_list_public.add(acpInfo);
         }
 
-        return ret_list;
+        return ret_list_public;
     }
 
     public HashMap<String,Object> create_hash_order_public(Order order){
-        HashMap<String,Object> ret = new HashMap<>();
-        ret.put("id",order.getId());
-        ret.put("clientName",order.getclientName());
-        ret.put("status",order.getStatus());
-        ret.put("storePickUpDate",order.getStorePickUpDate());
-        ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
-        ret.put("clientPickUpDate",order.getClientPickUpDate());
-        HashMap<String,Object> retACP = new HashMap<>();
-        retACP.put("id",order.getAcp().getId());
-        retACP.put("name",order.getAcp().getName());
-        retACP.put("address",order.getAcp().getAddress());
-        retACP.put("email",order.getAcp().getEmail());
-        ret.put("acp",retACP);
-        return ret;
+        HashMap<String,Object> ret_public = new HashMap<>();
+        ret_public.put("id",order.getId());
+        ret_public.put("clientName",order.getclientName());
+        ret_public.put("status",order.getStatus());
+        ret_public.put("storePickUpDate",order.getStorePickUpDate());
+        ret_public.put("acpDeliveryDate",order.getAcpDeliveryDate());
+        ret_public.put("clientPickUpDate",order.getClientPickUpDate());
+        HashMap<String,Object> retACP_public = new HashMap<>();
+        retACP_public.put("id",order.getAcp().getId());
+        retACP_public.put("name",order.getAcp().getName());
+        retACP_public.put("address",order.getAcp().getAddress());
+        retACP_public.put("email",order.getAcp().getEmail());
+        ret_public.put("acp",retACP_public);
+        return ret_public;
     }
 
 }
