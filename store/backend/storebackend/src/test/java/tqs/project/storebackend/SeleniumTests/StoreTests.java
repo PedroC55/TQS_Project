@@ -17,7 +17,6 @@ import org.openqa.selenium.support.ui.Select;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
 
-
 public class StoreTests {
     private WebDriver driver;
     
