@@ -64,19 +64,7 @@ public class PublicController {
             List<Order> allOrders = service.getByAcp(acp);
             ArrayList<HashMap<String,Object>> ret_list = new ArrayList<>();
             for (Order order : allOrders){
-                HashMap<String,Object> ret = new HashMap<>();
-                ret.put("id",order.getId());
-                ret.put("clientName",order.getclientName());
-                ret.put("status",order.getStatus());
-                ret.put("storePickUpDate",order.getStorePickUpDate());
-                ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
-                ret.put("clientPickUpDate",order.getClientPickUpDate());
-                HashMap<String,Object> retACP = new HashMap<>();
-                retACP.put("id",order.getAcp().getId());
-                retACP.put("name",order.getAcp().getName());
-                retACP.put("address",order.getAcp().getAddress());
-                retACP.put("email",order.getAcp().getEmail());
-                ret.put("acp",retACP);
+                HashMap<String,Object> ret = create_hash_order(order);
                 ret_list.add(ret);
             }
             return ret_list;
@@ -91,18 +79,7 @@ public class PublicController {
         Order order = service.getById(id);
         HashMap<String,Object> ret = new HashMap<>();
         if (order != null) {
-            ret.put("id",order.getId());
-            ret.put("clientName",order.getclientName());
-            ret.put("status",order.getStatus());
-            ret.put("storePickUpDate",order.getStorePickUpDate());
-            ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
-            ret.put("clientPickUpDate",order.getClientPickUpDate());
-            HashMap<String,Object> retACP = new HashMap<>();
-            retACP.put("id",order.getAcp().getId());
-            retACP.put("name",order.getAcp().getName());
-            retACP.put("address",order.getAcp().getAddress());
-            retACP.put("email",order.getAcp().getEmail());
-            ret.put("acp",retACP);
+            ret = create_hash_order(order);
         } else {
             ret.put("error", "doesn't exist");
         }
@@ -129,6 +106,23 @@ public class PublicController {
         }
 
         return ret_list;
+    }
+
+    public HashMap<String,Object> create_hash_order(Order order){
+        HashMap<String,Object> ret = new HashMap<>();
+        ret.put("id",order.getId());
+        ret.put("clientName",order.getclientName());
+        ret.put("status",order.getStatus());
+        ret.put("storePickUpDate",order.getStorePickUpDate());
+        ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
+        ret.put("clientPickUpDate",order.getClientPickUpDate());
+        HashMap<String,Object> retACP = new HashMap<>();
+        retACP.put("id",order.getAcp().getId());
+        retACP.put("name",order.getAcp().getName());
+        retACP.put("address",order.getAcp().getAddress());
+        retACP.put("email",order.getAcp().getEmail());
+        ret.put("acp",retACP);
+        return ret;
     }
 
 }
