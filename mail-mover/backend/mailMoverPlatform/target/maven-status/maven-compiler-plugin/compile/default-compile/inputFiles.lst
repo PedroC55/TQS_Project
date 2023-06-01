@@ -1,18 +1,18 @@
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/AcpController.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AcpServiceImpl.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/Order.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/OrdersController.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/OrderServiceImpl.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/Admin.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AdminServiceImpl.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/AdminController.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/PublicController.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/repositories/AdminRepository.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AcpService.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/repositories/OrderRepository.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/LoginInfo.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/MailMoverPlatformApplication.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/ACP.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AdminService.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/repositories/AcpRepository.java
-/Users/diogosilva/Documents/UA/TQS/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/OrderService.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/LoginInfo.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/AcpController.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AdminService.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AcpService.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/OrderService.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/repositories/OrderRepository.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/MailMoverPlatformApplication.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AdminServiceImpl.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/AcpServiceImpl.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/OrdersController.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/repositories/AcpRepository.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/services/OrderServiceImpl.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/AdminController.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/repositories/AdminRepository.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/ACP.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/controller/PublicController.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/Order.java
+/mnt/c/Users/manug/OneDrive/Área de Trabalho/Universidade/3º Ano/TQS/Project/TQS_Project/mail-mover/backend/mailMoverPlatform/src/main/java/tqs/project/mailMoverPlatform/entities/Admin.java
