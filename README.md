@@ -12,3 +12,5 @@
 
 ## Project bookmarks: 
   - Jira: https://tqsproject.atlassian.net/jira/software/c/projects/TP/boards/1?atlOrigin=eyJpIjoiMmVjNWExMzRjYWRmNGUxY2I2Y2Y5N2Y1NzRlYTJhYWIiLCJwIjoiaiJ9
+
+- Sonarcloud dashboard: https://sonarcloud.io/summary/overall?id=PedroC55_TQS_Project

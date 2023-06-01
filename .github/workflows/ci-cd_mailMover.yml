@@ -1,0 +1,35 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    paths:
+      - mail-mover/**
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      
+      - name: Build with Maven
+        run: |
+          cd mail-mover/backend/mailMoverPlatform
+          mvn clean package
+
+      - name: Run tests
+        run: |
+          cd mail-mover/backend/mailMoverPlatform
+          mvn test

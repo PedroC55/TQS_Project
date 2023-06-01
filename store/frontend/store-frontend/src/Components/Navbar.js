@@ -3,6 +3,7 @@ import Logo from "../Assets/Logo.png";
 import Search from "../Assets/search.png"
 import { BsCart2 } from "react-icons/bs";
 import { HiOutlineBars3 } from "react-icons/hi2";
+import { Link } from 'react-router-dom';
 
 import {
   Box,
@@ -54,21 +55,18 @@ const Navbar = () => {
   return (
     <nav>
       <div className='nav-logo-container'>
-        <img src={Logo} alt="" />
+        <img src={Logo} alt="" href='/app'/>
       </div>
       <div className='search'>
         <input type="text" className='search_input' placeholder='Enter your shoe..'></input>
         <button className='search_button'><img src={Search}/></button>
       </div>
       <div className='navbar-links-container'>
-        <a href=''>Home</a>
-        <a href=''>About</a>
-        <a href=''>Testimonials</a>
-        <a href=''>Contact</a>
-        <a href=''>
-          <BsCart2 className='navbar-cart-icon'/>
-        </a>
-        <button className='primary-button'>Booking Now</button>
+        <a href='/app'>Home</a>
+        <a name="allProducts" href='/AllProducts'>Products</a>
+        
+
+        
       </div>
       <div className='navbar-menu-container'>
         <HiOutlineBars3 onClick={() => setOpenMenu(true)}/>

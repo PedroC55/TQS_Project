@@ -1,0 +1,17 @@
+.footer {
+    position:static;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: #f2f2f2;
+    padding: 20px 0;
+  }
+  
+  .container {
+    text-align: center;
+  }
+  
+  .container p {
+    color: #888;
+    font-size: 14px;
+  }
