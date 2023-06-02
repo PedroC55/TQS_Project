@@ -124,12 +124,18 @@ public class OrdersController {
         ret.put("storePickUpDate",order.getStorePickUpDate());
         ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
         ret.put("clientPickUpDate",order.getClientPickUpDate());
-        HashMap<String,Object> retACP = new HashMap<>();
-        retACP.put("id",order.getAcp().getId());
-        retACP.put("name",order.getAcp().getName());
-        retACP.put("address",order.getAcp().getAddress());
-        retACP.put("email",order.getAcp().getEmail());
-        ret.put("acp",retACP);
-        return ret;
+        if (order.getAcp() != null){
+            HashMap<String,Object> retACP = new HashMap<>();
+            retACP.put("id",order.getAcp().getId());
+            retACP.put("name",order.getAcp().getName());
+            retACP.put("address",order.getAcp().getAddress());
+            retACP.put("email",order.getAcp().getEmail());
+            ret.put("acp",retACP);
+            return ret;
+        }else{
+            ret.put("acp", "");
+            return ret;
+        }
+        
     }
 }

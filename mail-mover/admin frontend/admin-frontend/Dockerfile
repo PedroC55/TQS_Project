@@ -1,6 +1,6 @@
 FROM node
 WORKDIR /admin-frontend
 COPY . .
-RUN npm install && npm run build
+RUN npm install --force && npm run build
 EXPOSE 3000
 CMD ["npm", "start"]

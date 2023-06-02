@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ACP.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mailMoverPlatform</a> &gt; <a href="index.source.html" class="el_package">tqs.project.mailMoverPlatform.entities</a> &gt; <span class="el_source">ACP.java</span></div><h1>ACP.java</h1><pre class="source lang-java linenums">package tqs.project.mailMoverPlatform.entities;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotNull;
+
+
+@Entity
+@Table(name=&quot;acps&quot;)
+public class ACP {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    
+    @Column
+    @NotNull(message = &quot;name is mandatory&quot;)
+    private String name;
+
+    @Column
+    @NotNull(message = &quot;address is mandatory&quot;)
+    private String address;
+
+    @Column
+    @NotNull(message = &quot;email is mandatory&quot;)
+    private String email;
+
+    @Column
+    @NotNull(message = &quot;password is mandatory&quot;)
+    private String password;
+    
+<span class="fc" id="L35">    public ACP(String name, String address, String email, String password) {</span>
+<span class="fc" id="L36">        this.name = name;</span>
+<span class="fc" id="L37">        this.address = address;</span>
+<span class="fc" id="L38">        this.email = email;</span>
+<span class="fc" id="L39">        this.password = password;</span>
+<span class="fc" id="L40">    }</span>
+<span class="fc" id="L41">    public ACP(){};</span>
+    public void setId(Long id) {
+<span class="fc" id="L43">        this.id = id;</span>
+<span class="fc" id="L44">    }</span>
+    public Long getId() {
+<span class="fc" id="L46">        return id;</span>
+    }
+    public String getName() {
+<span class="fc" id="L49">        return name;</span>
+    }
+    public void setName(String name) {
+<span class="nc" id="L52">        this.name = name;</span>
+<span class="nc" id="L53">    }</span>
+    public String getAddress() {
+<span class="fc" id="L55">        return address;</span>
+    }
+    public void setAddress(String address) {
+<span class="nc" id="L58">        this.address = address;</span>
+<span class="nc" id="L59">    }</span>
+    public String getEmail() {
+<span class="fc" id="L61">        return email;</span>
+    }
+    public void setEmail(String email) {
+<span class="nc" id="L64">        this.email = email;</span>
+<span class="nc" id="L65">    }</span>
+    public String getPassword() {
+<span class="fc" id="L67">        return password;</span>
+    }
+    public void setPassword(String password) {
+<span class="nc" id="L70">        this.password = password;</span>
+<span class="nc" id="L71">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

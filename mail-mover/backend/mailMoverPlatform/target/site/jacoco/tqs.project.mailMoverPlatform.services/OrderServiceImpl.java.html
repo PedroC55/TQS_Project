@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OrderServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">mailMoverPlatform</a> &gt; <a href="index.source.html" class="el_package">tqs.project.mailMoverPlatform.services</a> &gt; <span class="el_source">OrderServiceImpl.java</span></div><h1>OrderServiceImpl.java</h1><pre class="source lang-java linenums">package tqs.project.mailMoverPlatform.services;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import tqs.project.mailMoverPlatform.entities.ACP;
+import tqs.project.mailMoverPlatform.entities.Order;
+import tqs.project.mailMoverPlatform.repositories.OrderRepository;
+
+@Service
+<span class="fc" id="L14">public class OrderServiceImpl implements OrderService{</span>
+    @Autowired
+    OrderRepository repository;
+    
+    @Override
+    public List&lt;Order&gt; getAllOrders(){
+<span class="fc" id="L20">        return repository.findAll();</span>
+    }
+    @Override
+    public List&lt;Order&gt; getByAcp(ACP acp) {
+<span class="fc" id="L24">        return repository.findByAcp(acp);</span>
+    }
+    @Override
+    public Order getById(Long id){
+<span class="fc" id="L28">        Optional&lt;Order&gt; order = repository.findById(id);</span>
+<span class="fc bfc" id="L29" title="All 2 branches covered.">        if (order.isPresent()){return order.get();}</span>
+<span class="fc" id="L30">        return null;</span>
+    }
+    @Override
+    public Order getByAcpAndId(ACP acp, Long id){
+<span class="nc" id="L34">        return repository.findByAcpAndId(acp, id);</span>
+    }
+    @Override
+    public Order addOrder(Order order){
+<span class="fc" id="L38">        return repository.save(order);</span>
+    }
+    @Override
+    public boolean changeState_STORE_to_COURIER(Long id, Long ts){
+<span class="fc" id="L42">        Optional&lt;Order&gt; order = repository.findById(id);</span>
+<span class="pc bpc" id="L43" title="1 of 2 branches missed.">        if (!order.isPresent()){return false;}</span>
+        try {
+<span class="fc" id="L45">            Order newOrder = order.get();</span>
+<span class="fc" id="L46">            newOrder.status_fromStoreToCourier(ts);</span>
+<span class="fc" id="L47">            repository.save(newOrder);</span>
+<span class="nc" id="L48">        } catch (Exception e) {</span>
+<span class="nc" id="L49">            return false;</span>
+<span class="fc" id="L50">        }</span>
+<span class="fc" id="L51">        return true;</span>
+    }
+    @Override
+    public boolean changeState_COURIER_to_ACPPOINT(Long id, Long ts){
+<span class="fc" id="L55">        Optional&lt;Order&gt; order = repository.findById(id);</span>
+<span class="pc bpc" id="L56" title="1 of 2 branches missed.">        if (!order.isPresent()){return false;}</span>
+        try {
+<span class="fc" id="L58">            Order newOrder = order.get();</span>
+<span class="fc" id="L59">            newOrder.status_fromCourierToAcpPoint(ts);</span>
+<span class="fc" id="L60">            repository.save(newOrder);</span>
+<span class="nc" id="L61">        } catch (Exception e) {</span>
+<span class="nc" id="L62">            return false;</span>
+<span class="fc" id="L63">        }</span>
+<span class="fc" id="L64">        return true;</span>
+    }
+    @Override
+    public boolean changeState_ACPPOINT_to_COLLECTED(Long id, Long ts){
+<span class="fc" id="L68">        Optional&lt;Order&gt; order = repository.findById(id);</span>
+<span class="pc bpc" id="L69" title="1 of 2 branches missed.">        if (!order.isPresent()){return false;}</span>
+        try {
+<span class="fc" id="L71">            Order newOrder = order.get();</span>
+<span class="fc" id="L72">            newOrder.status_fromAcpPointToCollected(ts);</span>
+<span class="fc" id="L73">            repository.save(newOrder);</span>
+<span class="nc" id="L74">        } catch (Exception e) {</span>
+<span class="nc" id="L75">            return false;</span>
+<span class="fc" id="L76">        }</span>
+<span class="fc" id="L77">        return true;</span>
+    }
+    public void deleteAll() {
+<span class="nc" id="L80">        repository.deleteAll();</span>
+<span class="nc" id="L81">    }</span>
+
+    
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.10.202304240956</span></div></body></html>

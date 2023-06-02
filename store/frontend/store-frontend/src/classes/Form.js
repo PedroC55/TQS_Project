@@ -101,7 +101,6 @@ class Form extends Component {
             	            <input name="name" placeholder="Name" type="text"  value={username} onChange={this.handleUsernameChange}/>
             	            <input name="phone" placeholder="Phone 123456789" type="number"/>
             	            <input name="email" placeholder="E-mail" />
-            	            <textarea name="address" placeholder="Shipping Address" type="text"  value={address} onChange={this.handleAddressChange}/>
             	            <input name="creditCard" placeholder="Credit Card Number" type="number"/>
 							
 								
