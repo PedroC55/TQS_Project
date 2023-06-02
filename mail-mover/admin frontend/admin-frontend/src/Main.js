@@ -110,10 +110,8 @@ export default function Main () {
         password: passwordInput
       });
 
-      // Handle the response as needed
       console.log('ACP added successfully:', response.data);
 
-      // Close the modal
       handleClose();
     } catch (error) {
       console.error('Error adding ACP:', error);
@@ -137,12 +135,12 @@ export default function Main () {
 
   const handleFilterByAcp = async () => {
     try {
-      const acpId = document.getElementById('acpId').value; // Get the ACP ID from the TextField
+      const acpId = document.getElementById('acpId').value; 
 
       const response = await axios.get(`http://localhost:8080/v1/orders/byAcp/${acpId}`);
       console.log(response.data);
-      const filteredOrders = response.data; // Assuming the response data is an array of orders
-      setOrders(filteredOrders); // Update the orders array with the filtered data
+      const filteredOrders = response.data;
+      setOrders(filteredOrders); 
     } catch (error) {
       console.log('Error:', error);
     }
@@ -150,15 +148,15 @@ export default function Main () {
 
   const handleFilterById = async () => {
     try {
-      const orderId = document.getElementById('orderId').value; // Get the ACP ID from the TextField
+      const orderId = document.getElementById('orderId').value; 
 
       const response = await axios.get(`http://localhost:8080/v1/orders/byId/${orderId}`);
-      const order = response.data; // Assuming the response data is an array of orders
+      const order = response.data; 
       console.log(response.data);
       if (order && order.id) {
-        setOrders([order]); // Wrap the single order in an array and update the orders state
+        setOrders([order]); 
       } else {
-        setOrders([]); // If no order is found or the order ID is undefined, set the orders state to an empty array
+        setOrders([]); 
       }
     } catch (error) {
       console.log('Error:', error);
@@ -191,7 +189,7 @@ export default function Main () {
        
         <div className='tabs'>
           <Tabs value={activeTab} onChange={handleTabChange}>
-            <Tab label="Parcels"/>
+            <Tab id="here" label="Parcels"/>
             <Tab label="ACP Points"/>
           </Tabs>
         </div>
@@ -199,23 +197,25 @@ export default function Main () {
                 <>
                   <div className='filers'>
                     <TextField
+                        className='filteracp'
                         id="acpId"
                         label="Fitler by ACP"
                         variant="standard"
                         style={{marginLeft:'200px'}}
                         
                       />
-                    <IconButton aria-label="filter"  style={{ marginLeft: '10px', marginTop: '15px' ,backgroundColor: '#152238', borderRadius: 0 , color: 'white', width: '32px',height: '32px'}} onClick={handleFilterByAcp}>
+                    <IconButton className='btn-flt-acp' aria-label="filter"  style={{ marginLeft: '10px', marginTop: '15px' ,backgroundColor: '#152238', borderRadius: 0 , color: 'white', width: '32px',height: '32px'}} onClick={handleFilterByAcp}>
                       <ArrowForwardIcon />
                     </IconButton>   
                     <TextField
+                        className='filterid'
                         id="orderId"
                         label="Fitler by Id"
                         variant="standard"
                         style={{marginLeft:'30px'}}
                         
                       />
-                    <IconButton aria-label="filter"  style={{ marginLeft: '10px', marginTop: '15px' ,backgroundColor: '#152238', borderRadius: 0 , color: 'white', width: '32px',height: '32px'}} onClick={handleFilterById}>
+                    <IconButton className='btn-flt-id' aria-label="filter"  style={{ marginLeft: '10px', marginTop: '15px' ,backgroundColor: '#152238', borderRadius: 0 , color: 'white', width: '32px',height: '32px'}} onClick={handleFilterById}>
                       <ArrowForwardIcon />
                     </IconButton>  
                     
@@ -240,7 +240,7 @@ export default function Main () {
                       </TableHead>
                       <TableBody>
                         {orders.map((row , index) => (
-                          <StyledTableRow key={row.id}>
+                          <StyledTableRow className='orderrow' key={row.id}>
                             <StyledTableCell align="right">{row.id}</StyledTableCell>
                             <StyledTableCell align="right">{row.acpDeliveryDate ?  new Date(row.acpDeliveryDate).toLocaleDateString('en-GB') : ''}</StyledTableCell>
                             <StyledTableCell align="right">{row.clientName}</StyledTableCell>
@@ -280,11 +280,11 @@ export default function Main () {
               </TableHead>
               <TableBody>
                 {acps.map((row, index) => (
-                  <StyledTableRow key={row.id}>
-                    <StyledTableCell align="right">{row.id}</StyledTableCell>
-                    <StyledTableCell align="right">{row.name}</StyledTableCell>
+                  <StyledTableRow className='acprow' key={row.id}>
+                    <StyledTableCell  align="right">{row.id}</StyledTableCell>
+                    <StyledTableCell  align="right">{row.name}</StyledTableCell>
                     <StyledTableCell align="right">{row.address}</StyledTableCell>
-                    <StyledTableCell align="right">{row.email}</StyledTableCell>
+                    <StyledTableCell  align="right">{row.email}</StyledTableCell>
                     {/*<StyledTableCell align="right">
                       <Button
                         sx={{ backgroundColor: '#8B0000' }}
@@ -323,6 +323,7 @@ export default function Main () {
             >
               <Typography>Name</Typography>
               <TextField
+                className='acpname'
                 id="standard-basic"
                 label="ACP"
                 variant="filled"
@@ -331,6 +332,7 @@ export default function Main () {
               />
               <Typography>Address</Typography>
               <TextField
+                className='address'
                 id="standard-basic"
                 label="Description"
                 variant="filled"
@@ -339,21 +341,23 @@ export default function Main () {
               />
               <Typography>Email</Typography>
               <TextField
+                className='email'
                 id="standard-basic"
-                label="ACP"
+                label="Email"
                 variant="filled"
                 value={emailInput}
                 onChange={handleEmailInputChange}
               />
               <Typography>Password</Typography>
               <TextField
+                className='password'
                 id="standard-basic"
-                label="ACP"
+                label="Password"
                 variant="filled"
                 value={passwordInput}
                 onChange={handlePasswordInputChange}
               />
-              <Button sx={{ backgroundColor: "#152238" }} variant="contained" onClick={handleAddAcp}>
+              <Button sx={{ backgroundColor: "#152238" }} variant="contained" disabled={!acpNameInput || !addressInput || !emailInput || !passwordInput} onClick={handleAddAcp}>
                 Add ACP
               </Button>
             </Box>
