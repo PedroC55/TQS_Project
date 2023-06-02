@@ -51,7 +51,6 @@ public class AcpControllerMockMvcTest {
                 .accept(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.status().isCreated())
             .andExpect(jsonPath("$.id").exists())
-            //.andExpect(jsonPath("$.name", is("Loja ACP")))
             .andExpect(jsonPath("$.name").value("Loja ACP"))
             .andReturn().getResponse().getContentAsString();
     }

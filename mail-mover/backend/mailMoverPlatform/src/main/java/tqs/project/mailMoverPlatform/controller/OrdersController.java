@@ -3,6 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import tqs.project.mailMoverPlatform.entities.ACP;
 import tqs.project.mailMoverPlatform.entities.Order;
 import tqs.project.mailMoverPlatform.services.AcpServiceImpl;
@@ -55,25 +57,12 @@ public class OrdersController {
     @GetMapping("/all")
     public ArrayList<HashMap<String,Object>> getAllOrders() {
         List<Order> allOrders = service.getAllOrders();
-        ArrayList<HashMap<String,Object>> ret_list = new ArrayList<>();
-
+        ArrayList<HashMap<String,Object>> ret_list_orders = new ArrayList<>();
         for (Order order : allOrders){
-            HashMap<String,Object> ret = new HashMap<>();
-            ret.put("id",order.getId());
-            ret.put("clientName",order.getclientName());
-            ret.put("status",order.getStatus());
-            ret.put("storePickUpDate",order.getStorePickUpDate());
-            ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
-            ret.put("clientPickUpDate",order.getClientPickUpDate());
-            HashMap<String,Object> retACP = new HashMap<>();
-            retACP.put("id",order.getAcp().getId());
-            retACP.put("name",order.getAcp().getName());
-            retACP.put("address",order.getAcp().getAddress());
-            retACP.put("email",order.getAcp().getEmail());
-            ret.put("acp",retACP);
-            ret_list.add(ret);
+            HashMap<String,Object> ret = create_hash_order(order);
+            ret_list_orders.add(ret);
         }
-        return ret_list;
+        return ret_list_orders;
     }
     
     @GetMapping("/byAcp/{acp_id}")
@@ -84,19 +73,7 @@ public class OrdersController {
             List<Order> allOrders = service.getByAcp(acp);
             ArrayList<HashMap<String,Object>> ret_list = new ArrayList<>();
             for (Order order : allOrders){
-                HashMap<String,Object> ret = new HashMap<>();
-                ret.put("id",order.getId());
-                ret.put("clientName",order.getclientName());
-                ret.put("status",order.getStatus());
-                ret.put("storePickUpDate",order.getStorePickUpDate());
-                ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
-                ret.put("clientPickUpDate",order.getClientPickUpDate());
-                HashMap<String,Object> retACP = new HashMap<>();
-                retACP.put("id",order.getAcp().getId());
-                retACP.put("name",order.getAcp().getName());
-                retACP.put("address",order.getAcp().getAddress());
-                retACP.put("email",order.getAcp().getEmail());
-                ret.put("acp",retACP);
+                HashMap<String,Object> ret = create_hash_order(order);
                 ret_list.add(ret);
             }
             return ret_list;
@@ -111,18 +88,7 @@ public class OrdersController {
         Order order = service.getById(id);
         HashMap<String,Object> ret = new HashMap<>();
         if (order != null) {
-            ret.put("id",order.getId());
-            ret.put("clientName",order.getclientName());
-            ret.put("status",order.getStatus());
-            ret.put("storePickUpDate",order.getStorePickUpDate());
-            ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
-            ret.put("clientPickUpDate",order.getClientPickUpDate());
-            HashMap<String,Object> retACP = new HashMap<>();
-            retACP.put("id",order.getAcp().getId());
-            retACP.put("name",order.getAcp().getName());
-            retACP.put("address",order.getAcp().getAddress());
-            retACP.put("email",order.getAcp().getEmail());
-            ret.put("acp",retACP);
+            ret = create_hash_order(order);
         } else {
             ret.put("error", "doesn't exist");
         }
@@ -150,5 +116,20 @@ public class OrdersController {
         return service.changeState_ACPPOINT_to_COLLECTED(id, ts);
     }
 
-    
+    public HashMap<String,Object> create_hash_order(Order order){
+        HashMap<String,Object> ret = new HashMap<>();
+        ret.put("id",order.getId());
+        ret.put("clientName",order.getclientName());
+        ret.put("status",order.getStatus());
+        ret.put("storePickUpDate",order.getStorePickUpDate());
+        ret.put("acpDeliveryDate",order.getAcpDeliveryDate());
+        ret.put("clientPickUpDate",order.getClientPickUpDate());
+        HashMap<String,Object> retACP = new HashMap<>();
+        retACP.put("id",order.getAcp().getId());
+        retACP.put("name",order.getAcp().getName());
+        retACP.put("address",order.getAcp().getAddress());
+        retACP.put("email",order.getAcp().getEmail());
+        ret.put("acp",retACP);
+        return ret;
+    }
 }
