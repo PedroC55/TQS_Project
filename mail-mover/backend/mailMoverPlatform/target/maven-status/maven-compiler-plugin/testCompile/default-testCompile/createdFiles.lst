@@ -1,4 +1,5 @@
 tqs/project/mailMoverPlatform/controllerTests/AdminControllerMockMvcTest.class
+tqs/project/mailMoverPlatform/controllerTests/PublicControllerMockMvcTest.class
 tqs/project/mailMoverPlatform/repositoriesTests/AcpRepositoryTest.class
 tqs/project/mailMoverPlatform/repositoriesTests/AdminRepositoryTest.class
 tqs/project/mailMoverPlatform/servicesTests/AcpServiceTests.class
@@ -9,5 +10,6 @@ tqs/project/mailMoverPlatform/controllerTests/AcpControllerMockMvcTest.class
 tqs/project/mailMoverPlatform/integrationTests/AdminControllerIT.class
 tqs/project/mailMoverPlatform/integrationTests/OrdersControllerIT.class
 tqs/project/mailMoverPlatform/servicesTests/OrdersServiceTests.class
+tqs/project/mailMoverPlatform/integrationTests/PublicControllerIT.class
 tqs/project/mailMoverPlatform/entitiesTests/OrdersUnitaryTests.class
 tqs/project/mailMoverPlatform/servicesTests/AdminsServiceTests.class

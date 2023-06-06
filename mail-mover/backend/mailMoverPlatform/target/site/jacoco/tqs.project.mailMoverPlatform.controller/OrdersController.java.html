@@ -61,7 +61,7 @@ import tqs.project.mailMoverPlatform.services.OrderServiceImpl;
 <span class="fc bfc" id="L61" title="All 2 branches covered.">        for (Order order : allOrders){</span>
 <span class="fc" id="L62">            HashMap&lt;String,Object&gt; ret = create_hash_order(order);</span>
 <span class="fc" id="L63">            ret_list_orders.add(ret);</span>
-        }
+<span class="fc" id="L64">        }</span>
 <span class="fc" id="L65">        return ret_list_orders;</span>
     }
     
@@ -75,7 +75,7 @@ import tqs.project.mailMoverPlatform.services.OrderServiceImpl;
 <span class="fc bfc" id="L75" title="All 2 branches covered.">            for (Order order : allOrders){</span>
 <span class="fc" id="L76">                HashMap&lt;String,Object&gt; ret = create_hash_order(order);</span>
 <span class="fc" id="L77">                ret_list.add(ret);</span>
-            }
+<span class="fc" id="L78">            }</span>
 <span class="fc" id="L79">            return ret_list;</span>
         } else{
 <span class="nc" id="L81">            ArrayList&lt;HashMap&lt;String,Object&gt;&gt; ret_list = new ArrayList&lt;&gt;();</span>
@@ -89,7 +89,7 @@ import tqs.project.mailMoverPlatform.services.OrderServiceImpl;
 <span class="fc" id="L89">        HashMap&lt;String,Object&gt; ret = new HashMap&lt;&gt;();</span>
 <span class="pc bpc" id="L90" title="1 of 2 branches missed.">        if (order != null) {</span>
 <span class="fc" id="L91">            ret = create_hash_order(order);</span>
-<span class="fc" id="L92">        } else {</span>
+        } else {
 <span class="nc" id="L93">            ret.put(&quot;error&quot;, &quot;doesn't exist&quot;);</span>
         }
        

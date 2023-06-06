@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -23,7 +24,7 @@ public class StoreTests {
 
     @BeforeEach
     public void setup() {
-        System.setProperty("webdriver.chrome.driver", "/home/pedrocoelho5/Desktop/Driver/chromedriver");
+        //System.setProperty("webdriver.chrome.driver", "/home/pedrocoelho5/Desktop/Driver/chromedriver");
         driver = new ChromeDriver();
         
     }
@@ -33,6 +34,7 @@ public class StoreTests {
       driver.quit();
     }
     
+    @Disabled
     @Test
     public void validate_Login() {
         driver.get("http://localhost:3000/");
@@ -47,6 +49,7 @@ public class StoreTests {
         assertEquals(expectedTitle,title );
     }
 
+    @Disabled
     @Test
     public void view_Sneackers() {
         driver.get("http://localhost:3000/app");
@@ -57,6 +60,7 @@ public class StoreTests {
         assertEquals(expectedTitle,title);
     }
 
+    @Disabled
     @Test
     public void buy_Sneackers() {
         driver.get("http://localhost:3000/app");

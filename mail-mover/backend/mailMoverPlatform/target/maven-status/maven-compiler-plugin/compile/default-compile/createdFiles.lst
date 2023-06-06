@@ -4,6 +4,7 @@ tqs/project/mailMoverPlatform/entities/ACP.class
 tqs/project/mailMoverPlatform/services/AdminService.class
 tqs/project/mailMoverPlatform/services/AcpServiceImpl.class
 tqs/project/mailMoverPlatform/services/OrderServiceImpl.class
+tqs/project/mailMoverPlatform/entities/LoginInfo.class
 tqs/project/mailMoverPlatform/repositories/AcpRepository.class
 tqs/project/mailMoverPlatform/services/AdminServiceImpl.class
 tqs/project/mailMoverPlatform/controller/AdminController.class
@@ -14,3 +15,4 @@ tqs/project/mailMoverPlatform/MailMoverPlatformApplication.class
 tqs/project/mailMoverPlatform/services/AcpService.class
 tqs/project/mailMoverPlatform/repositories/OrderRepository.class
 tqs/project/mailMoverPlatform/entities/Admin.class
+tqs/project/mailMoverPlatform/controller/AcpController.class
