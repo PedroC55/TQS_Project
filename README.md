@@ -25,5 +25,5 @@
   - Utilizador: admin
   - Password: admin
 
-### Mudanças pós-apresentação:
+## Mudanças pós-apresentação:
   - Decidimos dar @Disabled nos testes efetuados com o Selenium para o frontend da store, pois apenas estão a funcionar numa máquina, de modo a que o professor consiga correr tudo sem erros;
