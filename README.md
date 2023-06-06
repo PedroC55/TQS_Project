@@ -18,3 +18,6 @@
 ## Login para a store:
   - Utilizador: user
   - Password: user
+
+## Como executar:
+  - docker-compose up
