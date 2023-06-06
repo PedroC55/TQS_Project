@@ -9,15 +9,21 @@
   - DevOps master: Manuel Diaz
   - Developer: Pedro Coelho, Luca Pereira, Diogo Silva, Manuel Diaz
 
+## Como executar:
+  - docker-compose up
 
 ## Project bookmarks: 
   - Jira: https://tqsproject.atlassian.net/jira/software/c/projects/TP/boards/1?atlOrigin=eyJpIjoiMmVjNWExMzRjYWRmNGUxY2I2Y2Y5N2Y1NzRlYTJhYWIiLCJwIjoiaiJ9
 
-- Sonarcloud dashboard: https://sonarcloud.io/summary/overall?id=PedroC55_TQS_Project
+  - Sonarcloud dashboard: https://sonarcloud.io/summary/overall?id=PedroC55_TQS_Project
 
 ## Login para a store:
   - Utilizador: user
   - Password: user
 
-## Como executar:
-  - docker-compose up
+## Login para a página de admin:
+  - Utilizador: admin
+  - Password: admin
+
+## Mudanças pós-apresentação:
+  - Decidimos dar @Disabled nos testes efetuados com o Selenium para o frontend da store, pois apenas estão a funcionar numa máquina, de modo a que o professor consiga correr tudo sem erros;
