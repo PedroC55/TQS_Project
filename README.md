@@ -27,5 +27,5 @@
 
 ## Mudanças pós-apresentação:
   - Decidimos dar @Disabled nos testes efetuados com o Selenium para o frontend da store, pois apenas estão a funcionar numa máquina, de modo a que o professor consiga correr tudo sem erros;
-  - O teste funcional do fronte end da pagina admin em cypress/e2e/... mudou de nome para algo mais apropriado e algumas linhas foram comentadas visto apenas funcionarem para certos casos fazerndo com que o teste falhe na maior parte dos casos;
-  - NO Login do adin foi acrecentada um credencial hardcodeded visto nao haver uma pagina para criar uma conta. A credencial é "admin" para ambos o username e password
+  - O teste funcional do frontend da pagina admin em cypress/e2e/... mudou de nome para algo mais apropriado e algumas linhas foram comentadas visto apenas funcionarem para certos casos, fazendo com que o teste falhe na maior parte dos casos;
+  - No Login do admin foi acrecentada uma credencial hardcoded visto não haver uma página para criar uma conta.
