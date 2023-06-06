@@ -68,10 +68,10 @@ export default function Login() {
                         LOG IN
                     </Typography>
                     </div>
-                    <TextField sx={{ backgroundColor: 'white' }} label="Username" variant="outlined" margin="normal" fullWidth value={username} onChange={(e) => setUsername(e.target.value)} />
+                    <TextField sx={{ backgroundColor: 'white' }} label="Email" variant="outlined" margin="normal" fullWidth value={username} onChange={(e) => setUsername(e.target.value)} />
                     <TextField sx={{ backgroundColor: 'white' }} label="Password" variant="outlined" margin="normal" type="password" fullWidth value={password} onChange={(e) => setPassword(e.target.value)} />
                     <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginTop: '50px' }}>
-                    <Button sx={{ color: 'white', backgroundColor: '#152238' }} size="large" variant="contained" type="submit">
+                    <Button sx={{ color: 'white', backgroundColor: '#152238' }} size="large" variant="contained" type="submit" disabled={!username || !password}>
                         Login
                     </Button>
                     </div>
